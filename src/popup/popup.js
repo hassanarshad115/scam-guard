@@ -32,14 +32,6 @@
     try { return new URL(url).hostname; } catch (e) { return ""; }
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
-  }
-
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs && tabs[0];
     const url = tab ? tab.url : "";
@@ -61,7 +53,12 @@
       setStatus(result.verdict);
 
       if (result.reasons && result.reasons.length) {
-        reasonsEl.innerHTML = result.reasons.map(r => "<li>" + escapeHtml(r) + "</li>").join("");
+        reasonsEl.textContent = "";
+        for (const reason of result.reasons) {
+          const li = document.createElement("li");
+          li.textContent = reason;
+          reasonsEl.appendChild(li);
+        }
         reasonsEl.hidden = false;
       }
 
