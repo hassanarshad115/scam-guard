@@ -1,6 +1,6 @@
 # Privacy Policy - Scam Guard
 
-_Effective date: (apni publish ki date likhein)_
+_Effective date: August 6, 2026_
 
 ## Summary
 
@@ -54,7 +54,7 @@ with a new effective date.
 ## Contact
 
 For any privacy-related question, contact us at:
-(your support email here)
+vidfer.support@gmail.com
 
 ---
 
