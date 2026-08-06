@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Guard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="sg-app">
+    <header class="sg-header">
+      <span class="sg-logo">&#128737;</span>
+      <div class="sg-title">
+        <strong>Scam Guard</strong>
+        <span class="sg-subtitle">Phishing &amp; Fake Website Detector</span>
+      </div>
+      <button class="sg-gear" id="sg-options" title="Open settings" aria-label="Open settings">&#9881;</button>
+    </header>
+
+    <div class="sg-status" id="sg-status">
+      <div class="sg-status-icon" id="sg-status-icon">&#8987;</div>
+      <div class="sg-status-text" id="sg-status-text">Checking this site...</div>
+    </div>
+
+    <div class="sg-host" id="sg-host"></div>
+
+    <ul class="sg-reasons" id="sg-reasons" hidden></ul>
+
+    <div class="sg-actions">
+      <button class="sg-btn sg-btn-danger" id="sg-block" hidden>Block this site</button>
+      <button class="sg-btn sg-btn-ok" id="sg-allow" hidden>Trust this site</button>
+    </div>
+
+    <footer class="sg-footer">
+      <span id="sg-stats">-</span>
+      <a href="#" id="sg-more">Settings</a>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

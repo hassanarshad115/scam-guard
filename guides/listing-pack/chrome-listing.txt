@@ -1,0 +1,106 @@
+====================================================================
+ CHROME WEB STORE - COPY-PASTE LISTING
+ (Har field ka text niche hai. Seedha paste karein, format badal ke nahi.)
+====================================================================
+
+--------------------------------------------------------------------------
+1) STORE LISTING > Name
+--------------------------------------------------------------------------
+Scam Guard - Phishing & Fake Website Detector
+
+--------------------------------------------------------------------------
+2) STORE LISTING > Short Description / Summary
+--------------------------------------------------------------------------
+Detects fake, phishing and scam websites before you enter your password or bank details. 100% free and private - all detection runs inside your browser. No data ever leaves your device.
+
+--------------------------------------------------------------------------
+3) STORE LISTING > Full Description
+--------------------------------------------------------------------------
+Protect yourself from online fraud with Scam Guard - a free, private phishing and fake website detector that warns you BEFORE you enter your password, card number or personal information.
+
+HOW IT WORKS
+Scam Guard scans every website you visit inside your browser (nothing is sent anywhere) and looks for the tricks scammers use every day:
+- Lookalike brand domains (paypal-secure-login.xyz)
+- Typo domains (paypa1.com, g00gle.com)
+- Leet-speak domains (g00gle.com, paypa1.com)
+- Suspicious new domains (.xyz, .top, .icu and more)
+- Non-English lookalike (homograph) characters
+- Classic URL tricks like the "@" symbol and IP addresses
+- Login/verify pages pretending to be real brands
+
+When a fake site is found, a full-screen warning blocks the page and tells you exactly why it looks suspicious - before you type anything.
+
+WHAT MAKES SCAM GUARD DIFFERENT
+- 100% free - no account, no subscription, no limits
+- 100% private - all detection runs in your browser, no data is ever collected, stored or shared
+- Works on Chrome, Edge, Firefox, Opera and Brave
+- Fast and lightweight - uses almost no memory
+- Easy to use - one-click block or trust any site
+- Full-screen warning on fake sites, green status on safe sites
+
+KEEP YOUR PASSWORDS SAFE
+Online scams and phishing attacks are growing every year. Scam Guard gives everyone free protection from fake websites, whether you are checking your bank, buying online or just browsing.
+
+Keywords: phishing protection, scam detector, fake website warning, safe browsing, online security, fraud protection, suspicious website checker, internet security, privacy protection.
+
+--------------------------------------------------------------------------
+4) STORE LISTING > Category
+--------------------------------------------------------------------------
+Security
+
+(Chrome me "Security" category ho to wo choose karein. Agar na mile to "Productivity".)
+
+--------------------------------------------------------------------------
+5) STORE LISTING > Language
+--------------------------------------------------------------------------
+English (United States) / English
+
+--------------------------------------------------------------------------
+6) STORE LISTING > Icon
+--------------------------------------------------------------------------
+assets/icons/icon128.png
+
+--------------------------------------------------------------------------
+7) STORE LISTING > Promotional Tiles (440x280)
+--------------------------------------------------------------------------
+assets/store/promo-440x280.png
+
+--------------------------------------------------------------------------
+8) STORE LISTING > Screenshots (1280x800, min 3 recommended)
+--------------------------------------------------------------------------
+assets/store/screenshot-1-safe.png
+assets/store/screenshot-2-warning.png
+assets/store/screenshot-3-popup.png
+
+--------------------------------------------------------------------------
+9) STORE LISTING > Permissions justification
+--------------------------------------------------------------------------
+Ye Chrome ka mandatory question hai. Copy-paste:
+
+storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
+
+tabs - Reads the web address (URL) of the current tab only, so Scam Guard can check whether the site you are visiting is a phishing or fake website. It never reads page content, passwords or personal data.
+
+Read and change all websites' data (<all_urls>) - Lets the extension check the URL of every website you open so it can show a full-screen warning BEFORE you enter your password on a fake site. All detection runs locally inside the browser; no data is sent to any server.
+
+--------------------------------------------------------------------------
+10) PRIVACY PRACTICES
+--------------------------------------------------------------------------
+Chrome ka privacy form. In saare questions par "No" ya appropriate option:
+- "Does this developer certify that this item complies with the developer program policies?" -> Yes
+- Single purpose: "Detects and warns about phishing and fake websites." (explain in detail below)
+- Data usage: sab fields par "No" - koi personal data, browsing history, passwords, location ya keystrokes collect nahi hote.
+- Unhandled errors/analytics: None.
+
+Privacy policy URL: koi bhi simple hosted page (jaise GitHub Pages). Text privacy-policy.md me ready hai.
+
+--------------------------------------------------------------------------
+11) Developer contact / support email
+--------------------------------------------------------------------------
+Apna koi bhi email (jo aapne developer account ke liye use kiya hai) - support ke liye.
+
+--------------------------------------------------------------------------
+12) Note
+--------------------------------------------------------------------------
+Chrome manually review karta hai, pehli dafa 2-5 din lag sakte hain.
+Zip: dist\scamguard-v1.0.0.zip (build.bat se banata hai).

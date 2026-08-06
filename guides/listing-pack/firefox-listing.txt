@@ -1,0 +1,87 @@
+====================================================================
+ FIREFOX ADD-ONS - COPY-PASTE LISTING
+ (addons.mozilla.org par "Submit a New Add-on" -> On this site)
+====================================================================
+
+--------------------------------------------------------------------------
+1) Name
+--------------------------------------------------------------------------
+Scam Guard - Phishing & Fake Website Detector
+
+--------------------------------------------------------------------------
+2) Summary (short, ek line)
+--------------------------------------------------------------------------
+Detects fake, phishing and scam websites before you enter your password or bank details. 100% free and private - all detection runs inside your browser.
+
+--------------------------------------------------------------------------
+3) Categories (2 tak chun sakte hain)
+--------------------------------------------------------------------------
+Security & Privacy
+
+(Dusra: Web Development ya "Other" mat lagana. Sirf Security & Privacy theek hai.)
+
+--------------------------------------------------------------------------
+4) Tags (5 tak)
+--------------------------------------------------------------------------
+phishing, scam, security, privacy, fraud
+
+--------------------------------------------------------------------------
+5) Full Description
+--------------------------------------------------------------------------
+Protect yourself from online fraud with Scam Guard - a free, private phishing and fake website detector that warns you BEFORE you enter your password, card number or personal information.
+
+HOW IT WORKS
+Scam Guard scans every website you visit inside your browser (nothing is sent anywhere) and looks for the tricks scammers use every day:
+- Lookalike brand domains (paypal-secure-login.xyz)
+- Typo domains (paypa1.com, g00gle.com)
+- Leet-speak domains (g00gle.com, paypa1.com)
+- Suspicious new domains (.xyz, .top, .icu and more)
+- Non-English lookalike (homograph) characters
+- Classic URL tricks like the "@" symbol and IP addresses
+- Login/verify pages pretending to be real brands
+
+When a fake site is found, a full-screen warning blocks the page and tells you exactly why it looks suspicious - before you type anything.
+
+WHAT MAKES SCAM GUARD DIFFERENT
+- 100% free - no account, no subscription, no limits
+- 100% private - all detection runs in your browser, no data is ever collected, stored or shared
+- Works on Chrome, Edge, Firefox, Opera and Brave
+- Fast and lightweight - uses almost no memory
+- Easy to use - one-click block or trust any site
+- Full-screen warning on fake sites, green status on safe sites
+
+KEEP YOUR PASSWORDS SAFE
+Online scams and phishing attacks are growing every year. Scam Guard gives everyone free protection from fake websites, whether you are checking your bank, buying online or just browsing.
+
+Keywords: phishing protection, scam detector, fake website warning, safe browsing, online security, fraud protection, suspicious website checker, internet security, privacy protection.
+
+--------------------------------------------------------------------------
+6) Permissions justification (Firefox puchta hai)
+--------------------------------------------------------------------------
+storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
+
+Access your data for all websites - Reads the web address (URL) of the page you are visiting so Scam Guard can check whether it is a phishing or fake website, and show a full-screen warning before you enter your password. Detection runs locally; no data is sent anywhere.
+
+--------------------------------------------------------------------------
+7) Privacy Policy URL (mandatory)
+--------------------------------------------------------------------------
+Koi bhi hosted page. Text privacy-policy.md me ready hai. Agar koi website nahi hai to GitHub Pages par ek free page bana lein.
+
+--------------------------------------------------------------------------
+8) Screenshots (optional but recommended)
+--------------------------------------------------------------------------
+assets/store/screenshot-1-safe.png
+assets/store/screenshot-2-warning.png
+assets/store/screenshot-3-popup.png
+
+--------------------------------------------------------------------------
+9) Icon
+--------------------------------------------------------------------------
+assets/icons/icon128.png (Firefox 128x128 ya 256x256 leta hai)
+
+--------------------------------------------------------------------------
+10) Note
+--------------------------------------------------------------------------
+Firefox upload free hai, review 1-2 din lagta hai.
+Zip: dist\scamguard-v1.0.0.zip
+manifest.json me gecko.id pehle se set hai, is liye accepted ho jayega.

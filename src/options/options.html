@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Guard - Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="sg-wrap">
+    <header class="sg-head">
+      <span class="sg-logo">&#128737;</span>
+      <div>
+        <h1>Scam Guard</h1>
+        <p>Settings - everything is stored in your browser, no data is sent to any server.</p>
+      </div>
+    </header>
+
+    <section class="sg-card">
+      <h2>Protection</h2>
+
+      <div class="sg-row">
+        <div>
+          <strong>Smart detection</strong>
+          <span>Automatically check for fake website patterns (recommended: ON).</span>
+        </div>
+        <label class="sg-switch">
+          <input type="checkbox" id="set-heuristics">
+          <span></span>
+        </label>
+      </div>
+
+      <div class="sg-row">
+        <div>
+          <strong>Full-screen warning</strong>
+          <span>Show a full-screen warning when a fake site is found (recommended: ON).</span>
+        </div>
+        <label class="sg-switch">
+          <input type="checkbox" id="set-overlay">
+          <span></span>
+        </label>
+      </div>
+
+      <div class="sg-row">
+        <div>
+          <strong>Show caution warnings</strong>
+          <span>If OFF, you will only get warnings for clearly dangerous sites (fewer false alarms).</span>
+        </div>
+        <label class="sg-switch">
+          <input type="checkbox" id="set-caution">
+          <span></span>
+        </label>
+      </div>
+
+      <div class="sg-row">
+        <div>
+          <strong>Sensitivity</strong>
+          <span>High = more warnings (some false alarms), Low = only confirmed fake sites.</span>
+        </div>
+        <select id="set-sensitivity" class="sg-select">
+          <option value="low">Low - only confirmed fake sites</option>
+          <option value="medium">Medium - balanced (recommended)</option>
+          <option value="high">High - maximum protection</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="sg-card">
+      <h2>Blocked Sites (always blocked)</h2>
+      <p class="sg-hint">Add domains you always want to block. One domain per line.</p>
+      <textarea id="blocked-list" class="sg-textarea" rows="4" placeholder="example-scam-site.xyz&#10;fake-login.top"></textarea>
+      <div class="sg-actions">
+        <button class="sg-btn" id="save-blocked">Save Blocked List</button>
+      </div>
+      <p class="sg-msg" id="blocked-msg"></p>
+    </section>
+
+    <section class="sg-card">
+      <h2>Trusted Sites (no warnings)</h2>
+      <p class="sg-hint">Add sites you know are safe so they are never warned about. One domain per line.</p>
+      <textarea id="allowed-list" class="sg-textarea" rows="4" placeholder="my-bank.com&#10;my-work-site.net"></textarea>
+      <div class="sg-actions">
+        <button class="sg-btn" id="save-allowed">Save Trusted List</button>
+      </div>
+      <p class="sg-msg" id="allowed-msg"></p>
+    </section>
+
+    <section class="sg-card">
+      <h2>Backup &amp; Stats</h2>
+      <div class="sg-actions sg-wrap-buttons">
+        <button class="sg-btn" id="export-list">Export My Lists (JSON)</button>
+        <button class="sg-btn" id="import-list">Import Lists</button>
+        <button class="sg-btn sg-btn-danger" id="reset-stats">Reset Stats</button>
+      </div>
+      <input type="file" id="import-file" accept=".json" hidden>
+      <p class="sg-msg" id="data-msg"></p>
+      <p class="sg-hint" id="stats-text"></p>
+    </section>
+
+    <section class="sg-card">
+      <h2>Privacy</h2>
+      <p class="sg-hint">
+        Scam Guard is 100% private. This extension <strong>sends no data to any server</strong>.
+        All detection happens entirely inside your browser. We never see or store your
+        passwords, history or personal data.
+      </p>
+      <p class="sg-hint">
+        If a site is warned about by mistake (a false alarm), add that domain to the
+        <strong>Trusted Sites</strong> list.
+      </p>
+    </section>
+
+    <footer class="sg-foot">
+      Scam Guard v1.0.0 &mdash; Phishing &amp; Fake Website Detector
+    </footer>
+  </div>
+  <script src="options.js"></script>
+</body>
+</html>

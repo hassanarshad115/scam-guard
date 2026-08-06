@@ -1,0 +1,113 @@
+/* Scam Guard - full-screen warning overlay (loaded at document_start) */
+
+#scamguard-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(10, 10, 20, 0.97) !important;
+  z-index: 2147483647 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+  color: #fff !important;
+  padding: 24px !important;
+  box-sizing: border-box !important;
+  animation: scamguard-fade 0.15s ease-out !important;
+}
+
+@keyframes scamguard-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#scamguard-box {
+  max-width: 520px !important;
+  width: 100% !important;
+  background: #1c1c2e !important;
+  border: 1px solid #ff3b30 !important;
+  border-radius: 14px !important;
+  padding: 28px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+}
+
+#scamguard-shield {
+  font-size: 48px !important;
+  line-height: 1 !important;
+  margin-bottom: 12px !important;
+  text-align: center !important;
+}
+
+#scamguard-box h1 {
+  margin: 0 0 8px !important;
+  font-size: 20px !important;
+  color: #ff453a !important;
+  text-align: center !important;
+}
+
+#scamguard-host {
+  font-size: 13px !important;
+  color: #ffd60a !important;
+  word-break: break-all !important;
+  text-align: center !important;
+  margin-bottom: 14px !important;
+}
+
+#scamguard-box ul {
+  margin: 0 0 18px !important;
+  padding-left: 20px !important;
+}
+
+#scamguard-box li {
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  margin-bottom: 6px !important;
+  color: #eee !important;
+}
+
+#scamguard-actions {
+  display: flex !important;
+  gap: 10px !important;
+  flex-wrap: wrap !important;
+}
+
+#scamguard-back,
+#scamguard-continue {
+  flex: 1 !important;
+  min-width: 160px !important;
+  padding: 12px !important;
+  border-radius: 10px !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+#scamguard-back {
+  background: #ff453a !important;
+  color: #fff !important;
+}
+
+#scamguard-back:hover {
+  background: #d9382f !important;
+}
+
+#scamguard-continue {
+  background: transparent !important;
+  color: #8e8e98 !important;
+  border: 1px solid #444 !important;
+}
+
+#scamguard-continue:hover {
+  color: #ccc !important;
+}
+
+#scamguard-hint {
+  font-size: 12px !important;
+  color: #8e8e98 !important;
+  margin-top: 14px !important;
+  text-align: center !important;
+  line-height: 1.5 !important;
+}

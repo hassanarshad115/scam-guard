@@ -1,0 +1,57 @@
+name: Publish to all stores
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build extension (tests + zip)
+        run: node tools/build.mjs
+
+      - name: Upload dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Download dist artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: List package contents
+        run: ls -la dist/
+
+      - name: Publish to Chrome, Firefox and Edge
+        uses: PlasmoHQ/bpp@v3
+        with:
+          keys: ${{ secrets.BPP_KEYS }}
+          chrome-file: dist/scamguard-v{version}.zip
+          firefox-file: dist/scamguard-v{version}.zip
+          edge-file: dist/scamguard-v{version}.zip
+          version-file: manifest.json
+          verbose: true
