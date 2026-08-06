@@ -98,4 +98,9 @@ and can be exported/imported by the user.
 
 ## License
 
-MIT - see `LICENSE`.
+**Functional Source License (FSL-1.1-MIT)** - see `LICENSE`.
+
+The source code is open for you to read, learn from and use non-commercially.
+Making a competing commercial product from this code is not permitted. On the
+second anniversary of each released version, that version becomes MIT-licensed
+automatically.
