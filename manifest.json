@@ -4,7 +4,7 @@
   "short_name": "__MSG_extensionShortName__",
   "version": "1.0.0",
   "description": "__MSG_extensionDescription__",
-  "author": "Your Agency",
+  "author": "Hassan Arshad",
   "default_locale": "en",
   "minimum_chrome_version": "109",
   "icons": {
@@ -21,7 +21,11 @@
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "src/background/service-worker.js"
+    "service_worker": "src/background/service-worker.js",
+    "scripts": [
+      "src/detector/detector.js",
+      "src/background/service-worker.js"
+    ]
   },
   "content_scripts": [
     {
@@ -53,7 +57,7 @@
   "options_page": "src/options/options.html",
   "browser_specific_settings": {
     "gecko": {
-      "id": "scamguard@youragency.example",
+      "id": "scamguard@hassanarshad115",
       "strict_min_version": "109.0"
     }
   }

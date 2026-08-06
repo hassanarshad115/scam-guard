@@ -1,7 +1,9 @@
 // Scam Guard - background service worker
 // Single source of truth for detection, blocklist, settings and stats.
 
-importScripts("../detector/detector.js");
+if (typeof importScripts === "function") {
+  importScripts("../detector/detector.js");
+}
 
 const storageArea = chrome.storage;
 
