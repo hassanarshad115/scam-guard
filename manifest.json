@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "short_name": "__MSG_extensionShortName__",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "__MSG_extensionDescription__",
   "author": "Hassan Arshad",
   "default_locale": "en",
@@ -15,17 +15,16 @@
   },
   "permissions": [
     "storage",
-    "tabs"
+    "tabs",
+    "alarms",
+    "contextMenus",
+    "notifications"
   ],
   "host_permissions": [
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "src/background/service-worker.js",
-    "scripts": [
-      "src/detector/detector.js",
-      "src/background/service-worker.js"
-    ]
+    "service_worker": "src/background/service-worker.js"
   },
   "content_scripts": [
     {
@@ -40,6 +39,36 @@
         "src/content/overlay.css"
       ],
       "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/content/domguard.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "match_about_blank": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/content/serp.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "run_at": "document_idle",
       "all_frames": false,
       "match_about_blank": false
     }
@@ -58,7 +87,7 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "scamguard@hassanarshad115",
-      "strict_min_version": "126.0",
+      "strict_min_version": "142.0",
       "data_collection_permissions": {
         "required": [
           "none"

@@ -8,7 +8,7 @@
     "description": "Short name"
   },
   "extensionDescription": {
-    "message": "Detects fake, phishing and scam websites before you enter your password, bank details or personal information. 100% free and private - everything runs in your browser, no data is ever sent to any server. Protects you from lookalike domains, homograph attacks, suspicious links and online fraud. Works on Chrome, Firefox, Edge, Opera and Brave. Safe browsing, fraud protection and internet security for everyone.",
-    "description": "SEO-optimized store description"
+    "message": "Detects phishing, scam and fake websites before you enter personal details. Free and private - runs entirely in your browser.",
+    "description": "Manifest description (max 132 chars for Chrome/Edge)"
   }
 }

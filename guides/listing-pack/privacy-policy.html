@@ -60,11 +60,19 @@
       data, browsing history, passwords, payment information or any other user data.</p>
 
     <h2>Where does detection happen?</h2>
-    <p>All website detection runs <strong>100% inside your browser</strong>, on your
-      own device. When you visit a website, Scam Guard reads only the web address
+    <p>Website checking runs <strong>inside your browser</strong>, on your own
+      device. When you visit a website, Scam Guard reads only the web address
       (URL) of the current tab and checks it locally against scam-detection rules
       that ship with the extension. No URL, no page content and no browsing history
-      is ever sent to any server, because there is no server.</p>
+      is ever sent to any server.</p>
+
+    <h2>The live phishing feed</h2>
+    <p>Once a day, Scam Guard downloads a <strong>public list of reported scam and
+      phishing domains</strong> from an open-source repository (served through a
+      content delivery network). This download contains only domain names from
+      public blacklists such as OpenPhish, URLhaus and cert.pl - it contains no
+      personal data, and nothing about you or your browsing is included or sent.
+      You can turn this feed off at any time in the extension settings.</p>
 
     <h2>What about the blocked and trusted lists?</h2>
     <p>Your blocked and trusted site lists are stored <strong>only in your own
@@ -77,8 +85,10 @@
       block/trust choices in your browser.</p>
 
     <h2>Third-party services</h2>
-    <p>Scam Guard does not integrate with any third-party service, analytics
-      provider, ad network or data broker.</p>
+    <p>The only third-party connection is the daily download of the public
+      phishing domain list described above. Scam Guard does not integrate with any
+      analytics provider, ad network or data broker, and no personal data is ever
+      shared with any party.</p>
 
     <h2>Children's privacy</h2>
     <p>Scam Guard is a general-purpose privacy tool and does not knowingly collect

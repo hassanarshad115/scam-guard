@@ -31,13 +31,32 @@ const cases = [
   ["https://paypal.com@evil-site.xyz/", "danger", "at-sign trick"],
   ["https://192.168.1.1/verify.php", "caution", "private IP + verify"],
   ["https://www.paypa1-secure.net/", "danger", "paypal typo"],
+  ["https://paypa1.com/", "danger", "leetspeak paypal domain"],
+  ["https://g00gle.com/", "danger", "leetspeak google domain"],
+  ["https://amaz0n.com/", "danger", "leetspeak amazon domain"],
+  ["https://paypall.com/", "danger", "double-letter paypal domain"],
   ["https://amaz0n-gift-card.site/", "danger", "amazon typo + gift"],
   ["https://hdfcbank.online/login", "danger", "bank lookalike .online"],
   ["https://xn--le-6kc8da.xyz/", "danger", "homograph (apple-like) .xyz"],
   ["https://your-bank-of-america.club/", "danger", "embedded brand .club"],
 
   ["https://free-prize-winner.tk/", "caution", "suspicious TLD"],
-  ["https://login-verify.site/", "caution", "login keyword domain"]
+  ["https://login-verify.site/", "caution", "login keyword domain"],
+
+  ["https://metamask.io/", "safe", "Real MetaMask"],
+  ["https://metamask-wallet.top/", "danger", "MetaMask wallet fake"],
+  ["https://www.fedex.com/", "safe", "Real FedEx"],
+  ["https://fedex-delivery.site/", "danger", "FedEx delivery fake"],
+  ["https://discord.com/", "safe", "Real Discord"],
+  ["https://discord-nitro-gift.sbs/", "danger", "Discord Nitro gift fake"],
+  ["https://kraken.com/", "safe", "Real Kraken"],
+  ["https://kraken-verify.icu/", "danger", "Kraken verify fake"],
+  ["https://www.royalmail.com/", "safe", "Real Royal Mail"],
+  ["https://royalmail-delivery.top/", "danger", "Royal Mail delivery fake"],
+  ["https://binance.com/", "safe", "Real Binance"],
+  ["https://binance-account-verify.club/", "danger", "Binance verify fake"],
+  ["https://ledger.com/", "safe", "Real Ledger"],
+  ["https://ledger-live-update.xyz/", "danger", "Ledger Live update fake"]
 ];
 
 let pass = 0, fail = 0;

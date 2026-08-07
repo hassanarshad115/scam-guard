@@ -54,6 +54,17 @@
 
       <div class="sg-row">
         <div>
+          <strong>Live phishing feed</strong>
+          <span>Download the public list of reported scam domains once a day so brand-new fakes are caught too (recommended: ON).</span>
+        </div>
+        <label class="sg-switch">
+          <input type="checkbox" id="set-livefeed">
+          <span></span>
+        </label>
+      </div>
+
+      <div class="sg-row">
+        <div>
           <strong>Sensitivity</strong>
           <span>High = more warnings (some false alarms), Low = only confirmed fake sites.</span>
         </div>
@@ -100,9 +111,9 @@
     <section class="sg-card">
       <h2>Privacy</h2>
       <p class="sg-hint">
-        Scam Guard is 100% private. This extension <strong>sends no data to any server</strong>.
-        All detection happens entirely inside your browser. We never see or store your
-        passwords, history or personal data.
+        Scam Guard is private: your passwords, history, page content and visited URLs
+        <strong>never leave your browser</strong>. The only connection is downloading
+        a public list of reported scam domains once a day - no personal data is sent.
       </p>
       <p class="sg-hint">
         If a site is warned about by mistake (a false alarm), add that domain to the
@@ -111,7 +122,7 @@
     </section>
 
     <footer class="sg-foot">
-      Scam Guard v1.0.0 &mdash; Phishing &amp; Fake Website Detector
+      Scam Guard v1.0.1 &mdash; Phishing &amp; Fake Website Detector
     </footer>
   </div>
   <script src="options.js"></script>

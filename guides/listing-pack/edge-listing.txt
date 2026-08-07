@@ -11,7 +11,7 @@ Scam Guard - Phishing & Fake Website Detector
 --------------------------------------------------------------------------
 2) Short description (max ~100 chars, Edge ka requirement)
 --------------------------------------------------------------------------
-Detects fake, phishing and scam websites before you enter your password or bank details. 100% free and private.
+Detects fake, phishing and scam websites before you enter your password or bank details. Free, private, with a live scam feed.
 
 --------------------------------------------------------------------------
 3) Long description
@@ -19,20 +19,29 @@ Detects fake, phishing and scam websites before you enter your password or bank 
 Protect yourself from online fraud with Scam Guard - a free, private phishing and fake website detector that warns you BEFORE you enter your password, card number or personal information.
 
 HOW IT WORKS
-Scam Guard scans every website you visit inside your browser (nothing is sent anywhere) and looks for the tricks scammers use every day:
+Scam Guard scans every website you visit inside your browser and looks for the tricks scammers use every day:
 - Lookalike brand domains (paypal-secure-login.xyz)
-- Typo domains (paypa1.com, g00gle.com)
-- Leet-speak domains (g00gle.com, paypa1.com)
+- Typo and leet-speak domains (paypa1.com, g00gle.com, amaz0n.com)
 - Suspicious new domains (.xyz, .top, .icu and more)
-- Non-English lookalike (homograph) characters
+- Non-English lookalike (homograph) characters and punycode
 - Classic URL tricks like the "@" symbol and IP addresses
-- Login/verify pages pretending to be real brands
+- Login forms that secretly send your password to ANOTHER domain
+- Password fields on unencrypted (HTTP) pages
+- Live blacklist: reported phishing domains from OpenPhish, URLhaus and cert.pl, refreshed daily
 
-When a fake site is found, a full-screen warning blocks the page and tells you exactly why it looks suspicious - before you type anything.
+When a fake site is found, a full-screen warning blocks the page and tells you exactly why it looks suspicious - before you type anything. You can choose a lighter corner warning instead.
+
+EXTRA PROTECTION, ALL FREE
+- Toolbar icon shows a live checkmark (safe) or warning (!) for every site
+- Risky links in Google, Bing and DuckDuckGo results are flagged before you click
+- Hover any link to see its safety verdict instantly
+- Right-click any link and choose "Check this link with Scam Guard"
+- Paste guard stops your password being pasted into suspicious pages
+- One-click block or trust any site
 
 WHAT MAKES SCAM GUARD DIFFERENT
 - 100% free - no account, no subscription, no limits
-- 100% private - all detection runs in your browser, no data is ever collected, stored or shared
+- Private - your URLs, passwords and history never leave your browser; the only download is a daily public list of scam domains
 - Works on Chrome, Edge, Firefox, Opera and Brave
 - Fast and lightweight - uses almost no memory
 - Easy to use - one-click block or trust any site
@@ -50,22 +59,31 @@ Security
 --------------------------------------------------------------------------
 5) Permissions justification (Edge puchta hai)
 --------------------------------------------------------------------------
-storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
+storage - Saves your settings, sensitivity level, your blocked/trusted site lists and your local reports. Everything is stored only in your own browser; nothing is uploaded.
 
-Read all websites' data - Reads the web address (URL) of the page you are visiting so Scam Guard can check whether it is a phishing or fake website, and show a full-screen warning before you enter your password. Detection runs locally; no data is sent anywhere.
+alarms - Schedules the once-a-day download of the public phishing domain list so it stays up to date.
+
+contextMenus - Adds the "Check this link with Scam Guard" item when you right-click a link, so you can verify a URL before opening it.
+
+notifications - Shows a one-time result notification after you use "Check this link", so you see whether the link is safe without leaving the page.
+
+Read all websites' data - Reads the web address (URL) of the page you are visiting so Scam Guard can check whether it is a phishing or fake website, and show a warning before you enter your password. Detection runs locally; no data is sent anywhere.
 
 --------------------------------------------------------------------------
 6) Privacy policy URL (mandatory)
 --------------------------------------------------------------------------
-Koi bhi hosted page. Text privacy-policy.md me ready hai.
+https://cdn.jsdelivr.net/gh/hassanarshad115/scam-guard@main/guides/listing-pack/privacy-policy.html
+(agar Edge "invalid URL" kahe to backup: https://github.com/hassanarshad115/scam-guard/blob/main/guides/listing-pack/privacy-policy.html)
 
 --------------------------------------------------------------------------
 7) Images
 --------------------------------------------------------------------------
 Icon: assets/icons/icon128.png
+Logo (300x300): assets/store/logo-300x300.png
+Promo tile (1400x560): assets/store/promo-tile-1400x560.png
 Screenshots: assets/store/screenshot-1-safe.png, screenshot-2-warning.png, screenshot-3-popup.png
 
 --------------------------------------------------------------------------
 8) Note
 --------------------------------------------------------------------------
-Edge validation Chrome ke zip ko bhi accept kar leta hai - dist\scamguard-v1.0.0.zip use karein. Edge ka review free aur usually fast hai.
+Chrome/Edge zip use karein: dist\scamguard-v1.0.1-chrome.zip ya dist\scamguard-v1.0.1-edge.zip. Firefox apna zip hai. Version bump ke bina re-upload nahi hota - naya version = nayi zip. Edge ka review free aur usually fast hai.

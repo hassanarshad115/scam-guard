@@ -36,7 +36,25 @@
     "sbi", "hdfcbank", "icicibank", "kotak", "axisbank", "bmo", "rbc", "tdbank",
     "revolut", "amex", "visa", "mastercard", "irctc", "nagad", "bkash", "jazzcash",
     "easypaisa", "paytm", "phonepe", "gpay", "razorpay", "stripe", "zelle",
-    "venmo", "cashapp", "westernunion", "moneygram", "worldremit"
+    "venmo", "cashapp", "westernunion", "moneygram", "worldremit",
+    "metamask", "ledger", "trezor", "trustwallet", "phantom", "exodus", "bybit",
+    "okx", "kucoin", "kraken", "robinhood", "etrade", "etoro", "schwab",
+    "vanguard", "capitalone", "usbank", "pnc", "santander", "bbva", "lloyds",
+    "natwest", "halifax", "nationwide", "monzo", "n26", "dbs", "maybank",
+    "ocbc", "cimb", "itau", "nubank", "bradesco", "yesbank", "bankofbaroda",
+    "adyen", "klarna", "afterpay", "remitly", "fedex", "usps", "dhl",
+    "royalmail", "postoffice", "swiggy", "zomato", "dominos", "pizzahut",
+    "starbucks", "burgerking", "flipkart", "myntra", "meesho", "bigbasket",
+    "zepto", "blinkit", "ajio", "nykaa", "shopee", "lazada", "aliexpress",
+    "temu", "etsy", "shein", "delhivery", "bluedart", "discord", "twitch",
+    "fortnite", "riotgames", "minecraft", "pinterest", "quora", "tinder",
+    "patreon", "kickstarter", "zalando", "nike", "adidas", "oneplus", "huawei",
+    "nintendo", "playstation", "xbox", "figma", "trello", "bitwarden",
+    "lastpass", "dashlane", "nordvpn", "expressvpn", "surfshark", "protonvpn",
+    "hulu", "disneyplus", "primevideo", "hotstar", "crunchyroll", "lyft",
+    "gojek", "careem", "upwork", "fiverr", "freelancer", "gcash", "gopay",
+    "grabpay", "shopeepay", "tmobile", "vodafone", "airtel", "telenor", "zong",
+    "ufone", "digicel", "etisalat", "mobily", "safaricom", "stc"
   ];
 
   // Cyrillic / Greek letters that visually look like Latin (homograph attacks)
@@ -122,7 +140,9 @@
       const clean2 = deleet(clean);
       for (let j = 0; j < BRANDS.length; j++) {
         const b = BRANDS[j];
-        if (clean === b || clean2 === b) return { brand: b, type: "exact", label: clean };
+        if (clean === b || clean2 === b) {
+          return { brand: b, type: clean === b ? "exact" : "leetspeak", label: clean };
+        }
       }
       for (let j = 0; j < BRANDS.length; j++) {
         const b = BRANDS[j];
@@ -224,6 +244,9 @@
         } else if (brandHit.type === "typo") {
           score += 65;
           reasons.push("The domain '" + hostname + "' looks similar to '" + brandLabel + "' - it may be fake.");
+        } else if (brandHit.type === "leetspeak") {
+          score += 65;
+          reasons.push("The domain '" + hostname + "' uses numbers to look like '" + brandLabel + "' - it is likely fake.");
         }
       } else if (suspiciousTld && suspiciousTld === ".zip") {
         // new dangerous TLDs are extra suspicious

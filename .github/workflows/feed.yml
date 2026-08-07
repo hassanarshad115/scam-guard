@@ -1,0 +1,36 @@
+name: Refresh live phishing feed
+
+on:
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-feed:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build feed from public lists
+        run: node tools/build-feed.mjs
+
+      - name: Commit updated feed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet feed/feed.json; then
+            echo "feed unchanged - nothing to commit"
+          else
+            git add feed/feed.json
+            git commit -m "feed: refresh phishing blacklist ($(date -u +%Y-%m-%d))"
+            git push origin HEAD:main
+          fi

@@ -8,6 +8,7 @@
   const heuristicsEl = $("set-heuristics");
   const overlayEl = $("set-overlay");
   const cautionEl = $("set-caution");
+  const livefeedEl = $("set-livefeed");
   const sensitivityEl = $("set-sensitivity");
   const blockedEl = $("blocked-list");
   const allowedEl = $("allowed-list");
@@ -48,6 +49,7 @@
       heuristicsEl.checked = settings.enableHeuristics !== false;
       overlayEl.checked = settings.enableWarningOverlay !== false;
       cautionEl.checked = settings.showCaution === true;
+      livefeedEl.checked = settings.enableLiveFeed !== false;
       sensitivityEl.value = settings.sensitivity || "medium";
     }
 
@@ -74,6 +76,10 @@
 
   cautionEl.addEventListener("change", () => {
     send("settings:set", { showCaution: cautionEl.checked });
+  });
+
+  livefeedEl.addEventListener("change", () => {
+    send("settings:set", { enableLiveFeed: livefeedEl.checked });
   });
 
   sensitivityEl.addEventListener("change", () => {
@@ -114,7 +120,7 @@
     if (!blocklist) return;
     const payload = {
       app: "ScamGuard",
-      version: "1.0.0",
+      version: "1.0.1",
       exported: new Date().toISOString(),
       settings: settings || {},
       blocklist: blocklist

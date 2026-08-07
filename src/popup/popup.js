@@ -18,9 +18,12 @@
   const reasonsEl = document.getElementById("sg-reasons");
   const blockBtn = document.getElementById("sg-block");
   const allowBtn = document.getElementById("sg-allow");
+  const reportBtn = document.getElementById("sg-report");
   const statsEl = document.getElementById("sg-stats");
   const optionsBtn = document.getElementById("sg-options");
   const moreLink = document.getElementById("sg-more");
+
+  let currentUrl = "";
 
   function setStatus(verdict) {
     statusEl.className = "sg-status " + (ICONS[verdict] ? verdict : "loading");
@@ -35,6 +38,7 @@
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     const tab = tabs && tabs[0];
     const url = tab ? tab.url : "";
+    currentUrl = url;
     const host = safeHost(url);
     hostEl.textContent = host;
 
@@ -43,6 +47,8 @@
       textEl.textContent = "This is a browser page - nothing to check.";
       return;
     }
+
+    reportBtn.hidden = false;
 
     chrome.runtime.sendMessage({ type: "analyze", url: url }, (result) => {
       if (chrome.runtime.lastError || !result) {
@@ -89,6 +95,17 @@
     });
   });
 
+  reportBtn.addEventListener("click", () => {
+    if (!currentUrl) return;
+    chrome.runtime.sendMessage({ type: "report:add", url: currentUrl }, (res) => {
+      if (res && res.ok) {
+        reportBtn.disabled = true;
+        reportBtn.textContent = "Reported";
+        textEl.textContent = "Thank you - this site was added to your local reports.";
+      }
+    });
+  });
+
   function openOptions() {
     chrome.runtime.openOptionsPage();
   }
@@ -97,8 +114,11 @@
   moreLink.addEventListener("click", (e) => { e.preventDefault(); openOptions(); });
 
   chrome.runtime.sendMessage({ type: "stats:get" }, (stats) => {
-    if (stats) {
-      statsEl.textContent = "Checked: " + (stats.total || 0) + "  |  Warnings: " + (stats.danger || 0);
-    }
+    chrome.runtime.sendMessage({ type: "feed:status" }, (feed) => {
+      const parts = [];
+      if (stats) parts.push("Checked: " + (stats.total || 0) + "  |  Warnings: " + (stats.danger || 0));
+      if (feed && feed.count) parts.push("Live feed: " + feed.count.toLocaleString() + " domains");
+      statsEl.textContent = parts.join("   ");
+    });
   });
 })();

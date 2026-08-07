@@ -2,7 +2,7 @@
 // 1. runs the detector self-test
 // 2. copies the extension into dist/
 // 3. minifies JS/CSS/HTML (comments + indentation, safe for ASI)
-// 4. creates store upload zip (Chrome / Edge / Opera / Firefox compatible)
+// 4. creates store upload zips (firefox variant + Chrome/Edge variant)
 
 import { cpSync, rmSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSync, existsSync } from "fs";
 import { join, sep } from "path";
@@ -22,6 +22,12 @@ console.log("[1/4] Running detector tests...");
 const test = spawnSync(process.execPath, [join(root, "tools", "test-detector.mjs")], { stdio: "inherit" });
 if (test.status !== 0) {
   console.error("Tests failed. Build aborted.");
+  process.exit(1);
+}
+console.log("[1/4] Running service-worker tests...");
+const testSw = spawnSync(process.execPath, [join(root, "tools", "test-service-worker.mjs")], { stdio: "inherit" });
+if (testSw.status !== 0) {
+  console.error("Service-worker tests failed. Build aborted.");
   process.exit(1);
 }
 
@@ -48,42 +54,62 @@ for (const file of files) {
 console.log("   Minified " + minified + " of " + files.length + " files.");
 
 // ---------- Step 4: zip ----------
-console.log("[4/4] Creating upload zip...");
+console.log("[4/4] Creating store upload zips...");
 const manifest = JSON.parse(readFileSync(join(root, "manifest.json"), "utf8"));
 const version = manifest.version;
-const zipName = "scamguard-v" + version + ".zip";
-const zipPath = join(distDir, zipName);
-rmSync(zipPath, { force: true });
 
-const pyPath = spawnSync("python", ["--version"], { stdio: "ignore" }).status === 0 ? "python" : "python3";
-const py = spawnSync(pyPath, [
-  "-c",
-  [
-    "import zipfile, os, sys",
-    "root = sys.argv[1]; out = sys.argv[2]; entries = sys.argv[3:]",
-    "with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:",
-    "    for e in entries:",
-    "        p = os.path.join(root, e)",
-    "        if os.path.isfile(p):",
-    "            z.write(p, os.path.relpath(p, root))",
-    "        else:",
-    "            for base, dirs, files in os.walk(p):",
-    "                for f in files:",
-    "                    fp = os.path.join(base, f)",
-    "                    z.write(fp, os.path.relpath(fp, root))",
-    "print('Created', out)",
-  ].join("\n"),
-  root, zipPath, "manifest.json", "_locales", "assets", "src"
-], { stdio: "inherit" });
+// Root manifest is the Chrome/Edge variant (service_worker only).
+const chromeManifest = manifest;
 
-if (py.status !== 0) {
-  console.error("ZIP creation failed. Build aborted.");
-  process.exit(1);
+// Firefox variant: drop the ignored service_worker, use background.scripts.
+const firefoxManifest = JSON.parse(JSON.stringify(manifest));
+if (firefoxManifest.background) {
+  delete firefoxManifest.background.service_worker;
+  firefoxManifest.background.scripts = [
+    "src/detector/detector.js",
+    "src/background/service-worker.js"
+  ];
 }
 
-// size summary
-const size = statSync(zipPath).size;
-console.log("\nDone! Upload file: " + zipPath + "  (" + (size / 1024).toFixed(1) + " KB)");
+const pyPath = spawnSync("python", ["--version"], { stdio: "ignore" }).status === 0 ? "python" : "python3";
+
+function createZip(zipName, manifestObj) {
+  writeFileSync(join(distDir, "manifest.json"), JSON.stringify(manifestObj, null, 2), "utf8");
+  const zipPath = join(distDir, zipName);
+  rmSync(zipPath, { force: true });
+  const py = spawnSync(pyPath, [
+    "-c",
+    [
+      "import zipfile, os, sys",
+      "root = sys.argv[1]; out = sys.argv[2]; entries = sys.argv[3:]",
+      "with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED) as z:",
+      "    for e in entries:",
+      "        p = os.path.join(root, e)",
+      "        if os.path.isfile(p):",
+      "            z.write(p, os.path.relpath(p, root))",
+      "        else:",
+      "            for base, dirs, files in os.walk(p):",
+      "                for f in files:",
+      "                    fp = os.path.join(base, f)",
+      "                    z.write(fp, os.path.relpath(fp, root))",
+      "print('Created', out)",
+    ].join("\n"),
+    distDir, zipPath, "manifest.json", "_locales", "assets", "src"
+  ], { stdio: "inherit" });
+  if (py.status !== 0) {
+    console.error("ZIP creation failed. Build aborted.");
+    process.exit(1);
+  }
+  const size = statSync(zipPath).size;
+  console.log("   " + zipName + "  (" + (size / 1024).toFixed(1) + " KB)");
+}
+
+createZip("scamguard-v" + version + "-firefox.zip", firefoxManifest);
+createZip("scamguard-v" + version + "-chrome.zip", chromeManifest);
+createZip("scamguard-v" + version + "-edge.zip", chromeManifest);
+
+// dist/manifest.json stays as the Chrome/Edge variant for load-unpacked testing.
+console.log("\nDone!");
 
 function walk(dir, acc) {
   for (const name of readdirSync(dir)) {

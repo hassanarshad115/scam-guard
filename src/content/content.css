@@ -1,0 +1,80 @@
+/* Scam Guard - live page guard + search label styles */
+
+#scamguard-tooltip.sg-tooltip {
+  position: fixed;
+  z-index: 2147483646;
+  max-width: 320px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font: 600 12px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  display: none;
+}
+#scamguard-tooltip.sg-tooltip-danger { background: #dc2626; }
+#scamguard-tooltip.sg-tooltip-caution { background: #d97706; }
+
+.sg-form-warn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 6px 0;
+  padding: 8px 12px;
+  border: 1px solid #fbbf24;
+  border-left: 4px solid #f59e0b;
+  border-radius: 6px;
+  background: #fffbeb;
+  color: #78350f;
+  font: 500 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.sg-form-warn button {
+  flex: 0 0 auto;
+  border: none;
+  background: transparent;
+  color: #92400e;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.sg-form-warn button:hover { background: #fde68a; }
+
+#scamguard-paste-guard {
+  position: fixed;
+  z-index: 2147483647;
+  max-width: 360px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #fca5a5;
+  background: #fef2f2;
+  color: #7f1d1d;
+  font: 500 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#scamguard-paste-guard button {
+  flex: 0 0 auto;
+  border: 1px solid #dc2626;
+  background: #dc2626;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#scamguard-paste-guard button:hover { background: #b91c1c; }
+
+.sg-serp-tag {
+  display: inline-block;
+  margin-right: 6px;
+  font-size: 12px;
+  line-height: 1;
+  vertical-align: middle;
+}
+.sg-serp-tag.sg-serp-danger { color: #dc2626; }
+.sg-serp-tag.sg-serp-caution { color: #d97706; }
