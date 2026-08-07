@@ -1,0 +1,92 @@
+====================================================================
+ OPERA ADD-ONS - COPY-PASTE LISTING
+ (addons.opera.com/developer/ par upload. Opera Chromium-based hai,
+ is liye chrome.zip wahi chalega - alag build nahi chahiye.)
+====================================================================
+
+--------------------------------------------------------------------------
+1) Name
+--------------------------------------------------------------------------
+Scam Guard - Phishing & Fake Website Detector
+
+--------------------------------------------------------------------------
+2) Short Description / Summary
+--------------------------------------------------------------------------
+Blocks phishing, scam and fake websites before you enter your password or bank details. Free, private and easy to use.
+
+--------------------------------------------------------------------------
+3) Category
+--------------------------------------------------------------------------
+Security & Privacy
+
+(Opera me "Security & Privacy" ya "Privacy" mila to use karein. Na mile to "Productivity".)
+
+--------------------------------------------------------------------------
+4) Full Description
+--------------------------------------------------------------------------
+Scam Guard is a free, private scam and phishing detector that protects you online - BEFORE you type your password, card number or personal information.
+
+HOW IT PROTECTS YOU
+- Blocks fake websites and fake login pages the moment you open them
+- Warns about lookalike websites that copy PayPal, Google, Amazon, Netflix, your bank and 150+ other brands
+- Flags dangerous links in Google, Bing and DuckDuckGo search results
+- Shows you the verdict on every link before you click it (just hover)
+- Stops you pasting your password into suspicious pages
+- Warns when a login page sends your password to another website
+- Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
+- Catches scam links hidden behind short links like bit.ly and adf.ly
+- Live scam list updated every day catches brand-new fakes
+
+WHY PEOPLE LOVE IT
+- 100% free - no account, no subscription, no limits
+- 100% private - everything runs in your browser, nothing is uploaded
+- Easy English - simple warnings you understand in one second
+- Fast and lightweight - uses almost no memory
+- One click to block or trust any website
+- Works on Chrome, Edge, Firefox, Opera and Brave
+
+WHO IT IS FOR
+Scam Guard is for everyone who uses the internet - students, parents, grandparents, online shoppers and anyone with a bank account. If a scammer tries to trick you, Scam Guard stops them.
+
+Install Scam Guard for free and keep your passwords, bank and identity safe.
+
+Keywords: phishing protection, scam detector, fake website checker, phishing website checker, safe browsing, password security, online fraud protection, suspicious link checker, internet security, scam website warning.
+
+--------------------------------------------------------------------------
+5) Permissions justification (Opera puchta hai to)
+--------------------------------------------------------------------------
+storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
+
+tabs - Reads the web address (URL) of the current tab only, so Scam Guard can check whether the site you are visiting is a phishing or fake website. It never reads page content, passwords or personal data.
+
+alarms - Schedules the once-a-day download of the public phishing domain list so it stays up to date.
+
+contextMenus - Adds the "Check this link with Scam Guard" item when you right-click a link, so you can verify a URL before opening it.
+
+notifications - Shows a one-time result notification after you use "Check this link", so you see whether the link is safe without leaving the page.
+
+Read and change all websites' data (<all_urls>) - Lets the extension check the URL of every website you open so it can show a full-screen warning BEFORE you enter your password on a fake site. All detection runs locally inside the browser; no data is sent to any server.
+
+--------------------------------------------------------------------------
+6) Privacy Policy URL
+--------------------------------------------------------------------------
+Koi bhi hosted page. Text privacy-policy.md me ready hai. (Chrome/Edge ke liye jo page banaya hai wohi use karein.)
+
+--------------------------------------------------------------------------
+7) Screenshots (optional but recommended)
+--------------------------------------------------------------------------
+assets/store/screenshot-1-safe.png
+assets/store/screenshot-2-warning.png
+assets/store/screenshot-3-popup.png
+
+--------------------------------------------------------------------------
+8) Icon
+--------------------------------------------------------------------------
+assets/icons/icon128.png
+
+--------------------------------------------------------------------------
+9) Note
+--------------------------------------------------------------------------
+Opera upload free hai, review 1-3 din lagta hai.
+Zip: dist\scamguard-v1.0.1-chrome.zip (Opera Chromium extensions accept karta hai, MV3 supported).
+Manifest me opera ka koi specific id nahi chahiye.

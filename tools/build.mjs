@@ -104,9 +104,16 @@ function createZip(zipName, manifestObj) {
   console.log("   " + zipName + "  (" + (size / 1024).toFixed(1) + " KB)");
 }
 
+// Opera variant: keep _locales/default_locale (Opera detects translations),
+// but short_name must be a literal - Opera's validator measures the raw
+// __MSG_ placeholder (28 chars) against its short_name length limit.
+const operaManifest = JSON.parse(JSON.stringify(manifest));
+operaManifest.short_name = "Scam Guard";
+
 createZip("scamguard-v" + version + "-firefox.zip", firefoxManifest);
 createZip("scamguard-v" + version + "-chrome.zip", chromeManifest);
 createZip("scamguard-v" + version + "-edge.zip", chromeManifest);
+createZip("scamguard-v" + version + "-opera.zip", operaManifest);
 
 // dist/manifest.json stays as the Chrome/Edge variant for load-unpacked testing.
 console.log("\nDone!");

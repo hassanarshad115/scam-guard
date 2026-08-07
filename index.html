@@ -2,10 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=guides/listing-pack/privacy-policy.html">
-  <title>Scam Guard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scam Guard - Free Phishing Protection &amp; Scam Detector for Chrome</title>
+  <meta name="description" content="Free phishing protection and scam detector extension. Blocks fake websites, phishing links and online fraud before you enter your password. Private, free and easy to use for Chrome, Edge, Firefox and Opera.">
+  <meta name="keywords" content="phishing protection, scam detector, fake website checker, phishing website checker, safe browsing, online fraud protection, suspicious link checker, internet security, scam website warning, website safety checker, password security, phishing extension, anti phishing, crypto scam protection">
+  <meta name="author" content="Hassan Arshad">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://hassanarshad115.github.io/scam-guard/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Scam Guard - Free Phishing Protection &amp; Scam Detector">
+  <meta property="og:description" content="Blocks fake websites, phishing links and online fraud before you enter your password. Free, private and easy to use.">
+  <meta property="og:url" content="https://hassanarshad115.github.io/scam-guard/">
+  <meta property="og:image" content="https://hassanarshad115.github.io/scam-guard/assets/store/promo-440x280.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Scam Guard - Free Phishing Protection &amp; Scam Detector">
+  <meta name="twitter:description" content="Blocks fake websites, phishing links and online fraud before you enter your password. Free, private and easy to use.">
+  <meta name="twitter:image" content="https://hassanarshad115.github.io/scam-guard/assets/store/promo-440x280.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Scam Guard - Phishing & Fake Website Detector",
+    "applicationCategory": "SecurityApplication",
+    "operatingSystem": "Chrome, Edge, Firefox, Opera, Brave",
+    "url": "https://hassanarshad115.github.io/scam-guard/",
+    "description": "Free phishing protection and scam detector. Blocks fake websites, dangerous links and online fraud before you enter your password, card number or personal information.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Hassan Arshad" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Scam Guard really free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Scam Guard is 100% free with every feature included. There is no premium version, no trial, no account and no subscription." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Scam Guard safe to use?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Scam Guard never collects or uploads your data. All detection runs inside your browser. The only download is a daily public list of scam domains - nothing personal is ever sent." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Scam Guard sell my data?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. There is no analytics, no trackers, no ad network and no data broker anywhere in the extension." }
+      },
+      {
+        "@type": "Question",
+        "name": "Will Scam Guard slow down my browser?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Scam Guard is lightweight and uses almost no memory." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Scam Guard block a website by mistake?",
+        "acceptedAnswer": { "@type": "Answer", "text": "If a safe website is ever flagged, one click adds it to your Trusted Sites list and it will never be warned about again." }
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { --bg: #12121a; --card: #1b1b28; --line: #2a2a3d; --green: #7ee0a3; --green-d: #22a05a; --text: #e9e9f0; --muted: #9a9aa8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0 28px; flex-wrap: wrap; }
+    .logo { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; }
+    .logo img { width: 40px; height: 40px; border-radius: 8px; }
+    .cta { display: inline-block; background: var(--green-d); color: #fff; text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 10px; }
+    .cta:hover { filter: brightness(1.15); }
+    .cta.ghost { background: transparent; border: 1px solid var(--green-d); color: var(--green); }
+    .hero { text-align: center; padding: 30px 0 40px; }
+    .hero h1 { font-size: 40px; line-height: 1.2; margin: 0 0 14px; }
+    .hero h1 span { color: var(--green); }
+    .hero p { font-size: 18px; color: var(--muted); max-width: 720px; margin: 0 auto 26px; }
+    .badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 10px; }
+    .badge { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
+    h2 { font-size: 26px; margin: 48px 0 8px; }
+    .sub { color: var(--muted); margin: 0 0 24px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+    .card strong { color: var(--green); display: block; margin-bottom: 4px; }
+    .card p { margin: 0; font-size: 14px; color: var(--muted); }
+    .steps { counter-reset: step; list-style: none; padding: 0; margin: 0; }
+    .steps li { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px 16px 58px; position: relative; margin-bottom: 12px; }
+    .steps li::before { counter-increment: step; content: counter(step); position: absolute; left: 18px; top: 16px; width: 26px; height: 26px; background: var(--green-d); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .steps li strong { display: block; }
+    .steps li span { color: var(--muted); font-size: 14px; }
+    .faq details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; }
+    .faq summary { font-weight: 600; cursor: pointer; }
+    .faq p { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+    footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--green); text-decoration: none; }
+    @media (max-width: 600px) { .hero h1 { font-size: 30px; } }
+  </style>
 </head>
 <body>
-  <p><a href="guides/listing-pack/privacy-policy.html">Scam Guard - Privacy Policy</a></p>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <img src="assets/icons/icon128.png" alt="Scam Guard shield logo">
+        Scam Guard
+      </div>
+      <div>
+        <a class="cta ghost" href="guides/listing-pack/privacy-policy.html">Privacy Policy</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Free Phishing Protection &amp; <span>Scam Detector</span></h1>
+      <p>Scam Guard blocks fake websites, phishing links and online fraud <strong>before</strong> you enter your password, card number or personal information. Free, private and easy to use.</p>
+      <div class="badges">
+        <span class="badge">100% Free</span>
+        <span class="badge">100% Private</span>
+        <span class="badge">No account needed</span>
+        <span class="badge">Chrome, Edge, Firefox, Opera, Brave</span>
+      </div>
+      <!-- Store links: fill after each listing is approved and live -->
+      <p style="margin-top:20px">
+        <a class="cta" href="https://chrome.google.com/webstore/search/scam%20guard">Install for Chrome</a>
+      </p>
+    </section>
+
+    <h2>How Scam Guard protects you</h2>
+    <p class="sub">Phishing protection features that run inside your browser, no clicks needed.</p>
+    <div class="grid">
+      <div class="card"><strong>Blocks fake websites</strong><p>Fake login pages are blocked the moment you open them - before you type anything.</p></div>
+      <div class="card"><strong>Brand lookalike detection</strong><p>Catches lookalikes of PayPal, Google, Amazon, Netflix, your bank and 150+ other brands.</p></div>
+      <div class="card"><strong>Safe search results</strong><p>Dangerous links in Google, Bing and DuckDuckGo results are flagged before you click.</p></div>
+      <div class="card"><strong>Link verdict on hover</strong><p>Hover any link to see its safety verdict instantly.</p></div>
+      <div class="card"><strong>Password paste guard</strong><p>Stops you pasting your password into suspicious pages.</p></div>
+      <div class="card"><strong>Crypto scam warnings</strong><p>Warns about fake wallets - MetaMask, Ledger, Binance and more.</p></div>
+      <div class="card"><strong>Short link scanner</strong><p>Catches scam links hidden behind shorteners like bit.ly and adf.ly.</p></div>
+      <div class="card"><strong>Live scam list</strong><p>A public list of reported scam domains updates every day to catch brand-new fakes.</p></div>
+      <div class="card"><strong>Full-screen warnings</strong><p>Dangerous pages are blocked with a clear warning that tells you exactly why.</p></div>
+    </div>
+
+    <h2>How it works</h2>
+    <p class="sub">Three steps. That is it.</p>
+    <ol class="steps">
+      <li><strong>Install Scam Guard</strong><span>It is free, private and takes seconds. No account, no sign-up.</span></li>
+      <li><strong>Browse normally</strong><span>Every site you visit gets an automatic verdict - green check for safe, red warning for risky.</span></li>
+      <li><strong>Stay protected</strong><span>Fake sites are blocked before you can enter a password. One click blocks or trusts any site.</span></li>
+    </ol>
+
+    <h2>Why people love Scam Guard</h2>
+    <div class="grid">
+      <div class="card"><strong>100% free</strong><p>No premium version, no trial, no subscription, no limits.</p></div>
+      <div class="card"><strong>100% private</strong><p>Everything runs in your browser. Nothing is collected, stored or uploaded.</p></div>
+      <div class="card"><strong>Easy English</strong><p>Simple warnings you understand in one second.</p></div>
+      <div class="card"><strong>Fast and lightweight</strong><p>Uses almost no memory.</p></div>
+      <div class="card"><strong>You are in control</strong><p>One click to block or trust any website.</p></div>
+      <div class="card"><strong>Works everywhere</strong><p>Chrome, Edge, Firefox, Opera and Brave.</p></div>
+    </div>
+
+    <h2>Frequently asked questions</h2>
+    <div class="faq">
+      <details open>
+        <summary>Is Scam Guard really free?</summary>
+        <p>Yes. Scam Guard is 100% free with every feature included. There is no premium version, no trial, no account and no subscription.</p>
+      </details>
+      <details>
+        <summary>Is Scam Guard safe to use?</summary>
+        <p>Yes. Scam Guard never collects or uploads your data. All detection runs inside your browser. The only download is a daily public list of scam domains - nothing personal is ever sent.</p>
+      </details>
+      <details>
+        <summary>Does Scam Guard sell my data?</summary>
+        <p>No. There is no analytics, no trackers, no ad network and no data broker anywhere in the extension.</p>
+      </details>
+      <details>
+        <summary>Will Scam Guard slow down my browser?</summary>
+        <p>No. Scam Guard is lightweight and uses almost no memory.</p>
+      </details>
+      <details>
+        <summary>Can Scam Guard block a website by mistake?</summary>
+        <p>If a safe website is ever flagged, one click adds it to your Trusted Sites list and it will never be warned about again.</p>
+      </details>
+    </div>
+
+    <p style="text-align:center; margin-top:40px">
+      <a class="cta" href="https://chrome.google.com/webstore/search/scam%20guard">Install Scam Guard - Free</a>
+    </p>
+
+    <footer>
+      <p>&copy; 2026 Hassan Arshad &middot; <a href="guides/listing-pack/privacy-policy.html">Privacy Policy</a></p>
+    </footer>
+  </div>
 </body>
 </html>

@@ -1,28 +1,30 @@
 ====================================================================
- CHROME WEB STORE - COPY-PASTE LISTING
- (Har field ka text niche hai. Seedha paste karein, format badal ke nahi.)
+ CHROME WEB STORE - SEO-OPTIMIZED COPY-PASTE LISTING
+ (Chrome Web Store search = name + short description + full
+  description + category. Tags ka field nahi hota Chrome me.
+  Isliye keywords inhi fields me rakhe gaye hain.)
 ====================================================================
 
 --------------------------------------------------------------------------
-1) STORE LISTING > Name
+1) STORE LISTING > Name  (max 45 chars - currently exactly 45, don't change)
 --------------------------------------------------------------------------
 Scam Guard - Phishing & Fake Website Detector
 
 --------------------------------------------------------------------------
-2) STORE LISTING > Short Description / Summary
+2) STORE LISTING > Short Description / Summary  (max 132 chars)
 --------------------------------------------------------------------------
-Blocks phishing, scam and fake websites before you enter your password or bank details. Free, private and easy to use.
+Free phishing protection & scam detector. Blocks fake websites and dangerous links before you enter your password. Private & easy.
 
 --------------------------------------------------------------------------
 3) STORE LISTING > Full Description
 --------------------------------------------------------------------------
-Scam Guard is a free, private scam and phishing detector that protects you online - BEFORE you type your password, card number or personal information.
+Scam Guard is a free phishing protection and scam detector that blocks fake websites, dangerous links and online fraud BEFORE you enter your password, card number or personal information.
 
-HOW IT PROTECTS YOU
+HOW IT PROTECTS YOU (phishing protection features)
 - Blocks fake websites and fake login pages the moment you open them
 - Warns about lookalike websites that copy PayPal, Google, Amazon, Netflix, your bank and 150+ other brands
 - Flags dangerous links in Google, Bing and DuckDuckGo search results
-- Shows you the verdict on every link before you click it (just hover)
+- Shows you the safety verdict on every link before you click it (just hover)
 - Stops you pasting your password into suspicious pages
 - Warns when a login page sends your password to another website
 - Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
@@ -40,16 +42,34 @@ WHY PEOPLE LOVE IT
 WHO IT IS FOR
 Scam Guard is for everyone who uses the internet - students, parents, grandparents, online shoppers and anyone with a bank account. If a scammer tries to trick you, Scam Guard stops them.
 
+FREQUENTLY ASKED QUESTIONS
+
+Is Scam Guard really free?
+Yes. Scam Guard is 100% free with every feature included. There is no premium version, no trial, no account and no subscription.
+
+Is Scam Guard safe to use?
+Yes. Scam Guard never collects or uploads your data. All detection runs inside your browser. The only download is a daily public list of scam domains - nothing personal is ever sent.
+
+Does Scam Guard sell my data?
+No. There is no analytics, no trackers, no ad network and no data broker anywhere in the extension.
+
+Will Scam Guard slow down my browser?
+No. Scam Guard is lightweight and uses almost no memory.
+
+Can Scam Guard block a website by mistake?
+If a safe website is ever flagged, one click adds it to your Trusted Sites list and it will never be warned about again.
+
 Install Scam Guard for free and keep your passwords, bank and identity safe.
 
-Keywords: phishing protection, scam detector, fake website checker, phishing website checker, safe browsing, password security, online fraud protection, suspicious link checker, internet security, scam website warning.
+Keywords: phishing protection, scam detector, fake website checker, phishing website checker, safe browsing, online fraud protection, suspicious link checker, internet security, scam website warning, website safety checker, password security.
 
 --------------------------------------------------------------------------
 4) STORE LISTING > Category
 --------------------------------------------------------------------------
 Security
 
-(Chrome me "Security" category ho to wo choose karein. Agar na mile to "Productivity".)
+(Chrome me "Security" category choose karein. Ye Chrome ki own category hai
+- "Productivity" na lein.)
 
 --------------------------------------------------------------------------
 5) STORE LISTING > Language
@@ -67,17 +87,19 @@ assets/icons/icon128.png
 assets/store/promo-440x280.png
 
 --------------------------------------------------------------------------
-8) STORE LISTING > Screenshots (1280x800, min 3 recommended)
+8) STORE LISTING > Screenshots (1280x800, min 3)
 --------------------------------------------------------------------------
 assets/store/screenshot-1-safe.png
 assets/store/screenshot-2-warning.png
 assets/store/screenshot-3-popup.png
 
---------------------------------------------------------------------------
-9) STORE LISTING > Permissions justification
---------------------------------------------------------------------------
-Ye Chrome ka mandatory question hai. Copy-paste:
+(Screenshots ke andar text overlay karne se conversion aur ranking
+improve hoti hai: "Checks every site instantly", "Full-screen warning
+before you type your password", "One-click block or trust".)
 
+--------------------------------------------------------------------------
+9) STORE LISTING > Permissions justification (mandatory)
+--------------------------------------------------------------------------
 storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
 
 tabs - Reads the web address (URL) of the current tab only, so Scam Guard can check whether the site you are visiting is a phishing or fake website. It never reads page content, passwords or personal data.
@@ -93,21 +115,25 @@ Read and change all websites' data (<all_urls>) - Lets the extension check the U
 --------------------------------------------------------------------------
 10) PRIVACY PRACTICES
 --------------------------------------------------------------------------
-Chrome ka privacy form. In saare questions par "No" ya appropriate option:
 - "Does this developer certify that this item complies with the developer program policies?" -> Yes
-- Single purpose: "Detects and warns about phishing and fake websites." (explain in detail below)
+- Single purpose: "Detects and warns about phishing and fake websites." (detail me yehi likhein)
 - Data usage: sab fields par "No" - koi personal data, browsing history, passwords, location ya keystrokes collect nahi hote.
 - Unhandled errors/analytics: None.
-
-Privacy policy URL: koi bhi simple hosted page (jaise GitHub Pages). Text privacy-policy.md me ready hai.
+- Privacy policy URL: koi bhi simple hosted page (jaise GitHub Pages). Text privacy-policy.md me ready hai.
 
 --------------------------------------------------------------------------
 11) Developer contact / support email
 --------------------------------------------------------------------------
-Apna koi bhi email (jo aapne developer account ke liye use kiya hai) - support ke liye.
+vidfer.support@gmail.com (jaisa privacy policy me hai)
 
 --------------------------------------------------------------------------
-12) Note
+12) SEO NOTES (ranking improve karne ke liye)
 --------------------------------------------------------------------------
-Chrome manually review karta hai, pehli dafa 2-5 din lag sakte hain.
-Zip: dist\scamguard-v1.0.1-chrome.zip (node tools/build.mjs se banata hai).
+Chrome Web Store ranking 4 cheezon par chalti hai:
+1. Name + summary + description keywords (ho gaya - yahi file)
+2. Installations - zyada installs = zyada ranking
+3. Ratings & reviews - 4-5 star reviews matlab top par aa jayega
+4. Google par top ke liye: listing ka link share karo, aur ek chhota SEO landing page banao (example.com/scam-guard) jo listing par link kare - Google us page ko bhi rank karega.
+
+Zip: dist\scamguard-v1.0.1-chrome.zip (node tools/build.mjs se banata hai)
+Chrome pehli dafa review karta hai, 2-5 din lag sakte hain. $5 developer fee pehle pay karni hoti hai.
