@@ -178,6 +178,48 @@ body {
 
 .sg-msg.error { color: #ff9b8f; }
 
+.sg-steps {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d7d7e2;
+}
+
+.sg-steps li {
+  margin-bottom: 8px;
+}
+
+.sg-steps strong {
+  color: #e9e9f0;
+}
+
+.sg-free-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sg-free-list li {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d7d7e2;
+  padding: 7px 0 7px 26px;
+  position: relative;
+  border-bottom: 1px solid #262636;
+}
+
+.sg-free-list li:last-child { border-bottom: none; }
+
+.sg-free-list li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 7px;
+  color: #7ee0a3;
+  font-size: 13px;
+}
+
 .sg-foot {
   text-align: center;
   color: #5c5c6e;

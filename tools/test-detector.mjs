@@ -56,7 +56,15 @@ const cases = [
   ["https://binance.com/", "safe", "Real Binance"],
   ["https://binance-account-verify.club/", "danger", "Binance verify fake"],
   ["https://ledger.com/", "safe", "Real Ledger"],
-  ["https://ledger-live-update.xyz/", "danger", "Ledger Live update fake"]
+  ["https://ledger-live-update.xyz/", "danger", "Ledger Live update fake"],
+
+  ["https://adf.ly/xyz123", "danger", "adf.ly paid redirector"],
+  ["https://www.ouo.io/some-link", "danger", "ouo.io paid redirector"],
+  ["https://shorte.st/link", "danger", "shorte.st paid redirector"],
+  ["https://bit.ly/abc123", "caution", "bit.ly shortener"],
+  ["https://www.tinyurl.com/abc", "caution", "tinyurl shortener"],
+  ["https://t.co/short", "caution", "t.co shortener"],
+  ["https://tiny.cc/xyz", "caution", "tiny.cc shortener"]
 ];
 
 let pass = 0, fail = 0;

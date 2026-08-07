@@ -17,10 +17,13 @@
 
   // ---- page verdict (background answers instantly from its cache) ----
   chrome.runtime.sendMessage({ type: "analyze", url: window.location.href }, (result) => {
-    if (!chrome.runtime.lastError && result) {
-      pageVerdict = result.verdict;
-      if (result.verdict === "danger" || result.verdict === "caution") armPasteGuard();
-    }
+    if (chrome.runtime.lastError || !result) return;
+    pageVerdict = result.verdict;
+    if (result.verdict === "danger" || result.verdict === "caution") armPasteGuard();
+    chrome.runtime.sendMessage({ type: "settings:get" }, (settings) => {
+      if (chrome.runtime.lastError || !settings) return;
+      if (settings.enableToasts !== false) showToast(result);
+    });
   });
 
   // ---- hover tooltip: verdict on any link ----
@@ -74,6 +77,69 @@
       if (tooltipEl) tooltipEl.style.display = "none";
     }, 150);
   }, true);
+
+  // ---- automatic verdict toast (shows once per page load) ----
+  function showToast(result) {
+    if (!result || typeof result !== "object") return;
+    const verdict = result.verdict;
+    if (verdict !== "safe" && verdict !== "caution" && verdict !== "danger") return;
+
+    const old = document.getElementById("sg-verdict-toast");
+    if (old && old.parentNode) old.parentNode.removeChild(old);
+
+    const danger = verdict === "danger";
+    const caution = verdict === "caution";
+    const headText = danger
+      ? "\u26D4 DANGER: this may be a fake website!"
+      : caution
+        ? "\u26A0\uFE0F Caution: this site looks suspicious"
+        : "\u2705 Safe: this website looks fine";
+
+    const el = document.createElement("div");
+    el.id = "sg-verdict-toast";
+    el.setAttribute("role", "status");
+    el.className = "sg-toast sg-toast-" + verdict;
+
+    const body = document.createElement("div");
+    body.className = "sg-toast-body";
+
+    const head = document.createElement("span");
+    head.className = "sg-toast-head";
+    head.textContent = headText;
+    body.appendChild(head);
+
+    if (danger || caution) {
+      const reason = (result.reasons && result.reasons[0]) || "";
+      if (reason) {
+        const detail = document.createElement("span");
+        detail.className = "sg-toast-detail";
+        detail.textContent = reason;
+        body.appendChild(detail);
+      }
+    }
+
+    const closeBtn = document.createElement("button");
+    closeBtn.type = "button";
+    closeBtn.setAttribute("aria-label", "Dismiss");
+    closeBtn.textContent = "\u2715";
+    closeBtn.addEventListener("click", () => dismissToast(el));
+
+    el.appendChild(body);
+    el.appendChild(closeBtn);
+    // If the full-screen warning overlay is up, host the toast inside it so it
+    // always paints above the warning, no matter the stacking order.
+    const host = document.getElementById("scamguard-overlay") || document.documentElement || document.body || document;
+    host.appendChild(el);
+
+    setTimeout(() => dismissToast(el), 5000);
+  }
+
+  function dismissToast(el) {
+    try {
+      el.classList.add("sg-toast-hide");
+      setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, 300);
+    } catch (err) { /* noop */ }
+  }
 
   // ---- sensitive fields ----
   function isSensitiveField(el) {

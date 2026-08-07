@@ -78,3 +78,53 @@
 }
 .sg-serp-tag.sg-serp-danger { color: #dc2626; }
 .sg-serp-tag.sg-serp-caution { color: #d97706; }
+
+#sg-verdict-toast.sg-toast {
+  position: fixed !important;
+  top: 16px !important;
+  right: 16px !important;
+  z-index: 2147483647 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 360px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font: 600 13px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#sg-verdict-toast.sg-toast-safe { background: #15803d; }
+#sg-verdict-toast.sg-toast-caution { background: #b45309; }
+#sg-verdict-toast.sg-toast-danger { background: #b91c1c; }
+#sg-verdict-toast.sg-toast.sg-toast-hide {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+#sg-verdict-toast.sg-toast button {
+  flex: 0 0 auto;
+  border: none;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#sg-verdict-toast.sg-toast button:hover { background: rgba(255, 255, 255, 0.38); }
+#sg-verdict-toast.sg-toast .sg-toast-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+#sg-verdict-toast.sg-toast .sg-toast-head { font-weight: 700; }
+#sg-verdict-toast.sg-toast .sg-toast-detail {
+  font-weight: 400;
+  font-size: 12px;
+  opacity: 0.92;
+  overflow-wrap: break-word;
+}

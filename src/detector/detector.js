@@ -25,6 +25,21 @@
     "gift-card", "invoice", "billing", "identity", "kyc", "otp", "free-gift"
   ];
 
+  // "Paid to view" ad redirectors - these hide the real destination behind ad
+  // pages and are frequently used to deliver scam or malware content.
+  const SHADY_REDIRECTORS = new Set([
+    "adf.ly", "ouo.io", "shorte.st", "sh.st", "adfoc.us", "bc.vc", "n9.cl",
+    "1t.ag", "2.gp", "exe.io", "shiia.net", "sub2unlock.net", "coinlink.co",
+    "shortzon.com", "linkly.site", "tny.sh", "ssls.pw"
+  ]);
+
+  // Popular link shorteners - the real destination is hidden behind a redirect.
+  const LINK_SHORTENERS = new Set([
+    "bit.ly", "tinyurl.com", "t.co", "goo.gl", "is.gd", "cutt.ly", "ow.ly",
+    "rebrand.ly", "tiny.cc", "rb.gy", "buff.ly", "shorturl.at", "t.ly",
+    "bl.ink", "tr.im", "v.gd", "qr.ae", "u.to", "chot.li", "tny.im"
+  ]);
+
   const BRANDS = [
     "google", "youtube", "gmail", "facebook", "instagram", "whatsapp", "netflix",
     "amazon", "paypal", "apple", "icloud", "microsoft", "outlook", "office365",
@@ -252,6 +267,17 @@
         // new dangerous TLDs are extra suspicious
         score += 45;
         reasons.push("The site uses a new and risky domain extension ('.zip'), often used for scams.");
+      }
+
+      // 4b. Redirect / link-shortener services
+      let hostNoWww = hostname;
+      if (hostNoWww.indexOf("www.") === 0) hostNoWww = hostNoWww.slice(4);
+      if (SHADY_REDIRECTORS.has(hostNoWww)) {
+        score += 70;
+        reasons.push("This link uses a paid redirection service that hides the real website - scam pages are often hidden behind these links.");
+      } else if (LINK_SHORTENERS.has(hostNoWww)) {
+        score += 35;
+        reasons.push("This link is shortened - the real destination is hidden, check carefully before opening it.");
       }
 
       // 5. Keywords inside the registrable domain (no brand match)

@@ -11,9 +11,9 @@ Firefox par publish karna **bilkul free** hai - koi fee nahi, koi card nahi.
 
 ## Extension upload
 
-1. Pehle build karein: `build.bat` chala kar `dist\scamguard-v1.0.0.zip` bana lein.
+1. Pehle build karein: `node tools/build.mjs` chala kar `dist\scamguard-v1.0.1-firefox.zip` bana lein.
 2. Developer Hub me **"Submit a New Add-on"** par click karein.
-3. **"Upload your file"** -> `scamguard-v1.0.0.zip` select karein.
+3. **"Upload your file"** -> `scamguard-v1.0.1-firefox.zip` select karein.
 4. **Distribution** choose karein: **"Self-distributed"** (pehle test ke liye) ya
    **"On this site"** (public listing) - final publish ke liye "On this site" chunein.
 5. Listing form fill karein (help ke liye `seo-listing-guide.md` dekhein).

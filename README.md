@@ -68,14 +68,17 @@ node tools/test-detector.mjs
 
 ## Build the store package
 
-Double-click `build.bat`, or run:
+Run:
 
 ```
 node tools/build.mjs
 ```
 
 This runs the tests, copies the extension into `dist/`, minifies the code and
-creates `dist/scamguard-v1.0.0.zip` - the single file you upload to every store.
+creates the store upload zips:
+- `dist/scamguard-v1.0.1-chrome.zip`
+- `dist/scamguard-v1.0.1-edge.zip`
+- `dist/scamguard-v1.0.1-firefox.zip`
 
 ---
 

@@ -9,6 +9,7 @@
   const overlayEl = $("set-overlay");
   const cautionEl = $("set-caution");
   const livefeedEl = $("set-livefeed");
+  const toastsEl = $("set-toasts");
   const sensitivityEl = $("set-sensitivity");
   const blockedEl = $("blocked-list");
   const allowedEl = $("allowed-list");
@@ -50,6 +51,7 @@
       overlayEl.checked = settings.enableWarningOverlay !== false;
       cautionEl.checked = settings.showCaution === true;
       livefeedEl.checked = settings.enableLiveFeed !== false;
+      toastsEl.checked = settings.enableToasts !== false;
       sensitivityEl.value = settings.sensitivity || "medium";
     }
 
@@ -80,6 +82,10 @@
 
   livefeedEl.addEventListener("change", () => {
     send("settings:set", { enableLiveFeed: livefeedEl.checked });
+  });
+
+  toastsEl.addEventListener("change", () => {
+    send("settings:set", { enableToasts: toastsEl.checked });
   });
 
   sensitivityEl.addEventListener("change", () => {

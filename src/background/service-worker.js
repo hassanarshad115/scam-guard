@@ -13,7 +13,8 @@ const DEFAULT_SETTINGS = {
   showCaution: false,
   sensitivity: "medium",
   warningMode: "full",
-  enableLiveFeed: true
+  enableLiveFeed: true,
+  enableToasts: true
 };
 
 const DEFAULT_BLOCKLIST = { blocked: [], allowed: [] };
@@ -24,6 +25,23 @@ const FEED_REFRESH_MS = 12 * 60 * 60 * 1000;
 const FEED_ALARM_PERIOD_MIN = 720;
 
 let feedCache = null;
+let feedReady = null;
+
+// Feed cache is in-memory only, so on every worker wake (MV3 suspends idle
+// workers) we must reload it from storage before relying on it.
+function ensureFeed() {
+  if (feedReady) return feedReady;
+  feedReady = (async () => {
+    try {
+      const stored = await storageArea.local.get({ feed: null });
+      feedCache = feedFromStored(stored.feed);
+    } catch (e) {
+      feedCache = null;
+    }
+    return feedCache;
+  })();
+  return feedReady;
+}
 
 function feedFromStored(stored) {
   try {
@@ -44,6 +62,7 @@ async function refreshFeed(force) {
     const stored = await storageArea.local.get({ feed: null });
     if (!force && stored.feed && stored.feed.ts && Date.now() - stored.feed.ts < FEED_REFRESH_MS) {
       feedCache = feedFromStored(stored.feed);
+      feedReady = Promise.resolve(feedCache);
       return !!feedCache;
     }
     const url = FEED_URL + "?v=" + Math.floor(Date.now() / 86400000);
@@ -52,6 +71,7 @@ async function refreshFeed(force) {
     const json = await res.json();
     if (!json || !Array.isArray(json.domains) || json.domains.length === 0) return false;
     feedCache = { generated: json.generated || "", domains: new Set(json.domains) };
+    feedReady = Promise.resolve(feedCache);
     await storageArea.local.set({
       feed: { ts: Date.now(), generated: json.generated || "", text: json.domains.join("\n") }
     });
@@ -162,6 +182,7 @@ async function analyze(rawUrl) {
 
   // live phishing feed (skipped when the user explicitly allowed the site)
   if (!userAllowed && settings.enableLiveFeed) {
+    await ensureFeed();
     const feedHit = feedLookup(rawUrl);
     if (feedHit) {
       result = {
@@ -316,6 +337,10 @@ function attachEvent(api, name, fn) {
   const target = api && api[name];
   if (target && typeof target.addListener === "function") target.addListener(fn);
 }
+
+// Load the feed from storage on every worker start so verdicts stay consistent
+// even after Chrome suspends and wakes the service worker.
+ensureFeed();
 
 attachEvent(chrome.runtime, "onInstalled", () => { refreshFeed(true); createMenu(); });
 attachEvent(chrome.runtime, "onStartup", () => { refreshFeed(true); });

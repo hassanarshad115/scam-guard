@@ -15,7 +15,7 @@ Edge par publish karna **bilkul free** hai.
 
 ## Extension submit
 
-1. Build karein: `build.bat` -> `dist\scamguard-v1.0.0.zip`.
+1. Build karein: `node tools/build.mjs` -> `dist\scamguard-v1.0.1-edge.zip`.
 2. Partner Center me **"Create a new extension"** karein.
 3. Zip upload karein aur listing details bharein
    (copy-paste text ke liye `seo-listing-guide.md` dekhein).

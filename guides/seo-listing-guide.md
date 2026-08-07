@@ -18,36 +18,39 @@ Scam Guard - Phishing & Fake Website Detector
 ## Short description (Firefox/Edge me)
 
 ```
-Detects fake, phishing and scam websites before you enter your password or bank details. 100% free and private - works on Chrome, Firefox, Edge, Opera and Brave.
+Blocks phishing, scam and fake websites before you enter your password or bank details. Free, private and easy to use.
 ```
 
 ## Full description (Chrome store listing + Firefox/Edge "detailed" field)
 
 ```
-Protect yourself from online fraud with Scam Guard - a free, private phishing and fake website detector that warns you BEFORE you enter your password, card number or personal information.
+Scam Guard is a free, private scam and phishing detector that protects you online - BEFORE you type your password, card number or personal information.
 
-HOW IT WORKS
-Scam Guard scans every website you visit inside your browser (nothing is sent anywhere) and looks for the tricks scammers use every day:
-- Lookalike brand domains (paypal-secure-login.xyz)
-- Typo domains (paypa1.com, g00gle.com)
-- Suspicious new domains (.xyz, .top, .icu and more)
-- Non-English lookalike (homograph) characters
-- Classic URL tricks like the "@" symbol
-- Login/verify pages pretending to be real brands
+HOW IT PROTECTS YOU
+- Blocks fake websites and fake login pages the moment you open them
+- Warns about lookalike websites that copy PayPal, Google, Amazon, Netflix, your bank and 150+ other brands
+- Flags dangerous links in Google, Bing and DuckDuckGo search results
+- Shows you the verdict on every link before you click it (just hover)
+- Stops you pasting your password into suspicious pages
+- Warns when a login page sends your password to another website
+- Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
+- Catches scam links hidden behind short links like bit.ly and adf.ly
+- Live scam list updated every day catches brand-new fakes
 
-When a fake site is found, a full-screen warning blocks the page and tells you exactly why it looks suspicious.
-
-WHAT MAKES SCAM GUARD DIFFERENT
+WHY PEOPLE LOVE IT
 - 100% free - no account, no subscription, no limits
-- 100% private - all detection runs in your browser, no data is ever collected, stored or shared
-- Works on Chrome, Firefox, Edge, Opera and Brave
+- 100% private - everything runs in your browser, nothing is uploaded
+- Easy English - simple warnings you understand in one second
 - Fast and lightweight - uses almost no memory
-- Easy to use - one-click block or trust any site
+- One click to block or trust any website
+- Works on Chrome, Edge, Firefox, Opera and Brave
 
-KEEP YOUR PASSWORDS SAFE
-Online scams and phishing attacks are growing every year. Scam Guard gives everyone free protection from fake websites, whether you are checking your bank, buying online or just browsing.
+WHO IT IS FOR
+Scam Guard is for everyone who uses the internet - students, parents, grandparents, online shoppers and anyone with a bank account. If a scammer tries to trick you, Scam Guard stops them.
 
-Keywords: phishing protection, scam detector, fake website warning, safe browsing, online security, fraud protection, suspicious website checker, internet security, privacy protection.
+Install Scam Guard for free and keep your passwords, bank and identity safe.
+
+Keywords: phishing protection, scam detector, fake website checker, phishing website checker, safe browsing, password security, online fraud protection, suspicious link checker, internet security, scam website warning.
 ```
 
 ## Privacy policy text (ek simple page par paste karein)
