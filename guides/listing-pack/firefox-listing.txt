@@ -39,11 +39,11 @@ HOW IT PROTECTS YOU
 - Warns when a login page sends your password to another website
 - Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
 - Catches scam links hidden behind short links like bit.ly and adf.ly
-- Live scam list updated every day catches brand-new fakes
+- Live scam list updated regularly catches brand-new fakes
 
 WHY PEOPLE LOVE IT
 - 100% free - no account, no subscription, no limits
-- 100% private - everything runs in your browser, nothing is uploaded
+- 100% private - no tracking, no uploads; the only download is a public list of reported scam domains (you can turn it off)
 - Easy English - simple warnings you understand in one second
 - Fast and lightweight - uses almost no memory
 - One click to block or trust any website
@@ -61,13 +61,13 @@ Keywords: phishing protection, scam detector, fake website checker, phishing web
 --------------------------------------------------------------------------
 storage - Saves your settings, sensitivity level, your blocked/trusted site lists and your local reports. Everything is stored only in your own browser; nothing is uploaded.
 
-alarms - Schedules the once-a-day download of the public phishing domain list so it stays up to date.
+alarms - Schedules the twice-a-day download of the public phishing domain list so it stays up to date.
 
 contextMenus - Adds the "Check this link with Scam Guard" item when you right-click a link, so you can verify a URL before opening it.
 
 notifications - Shows a one-time result notification after you use "Check this link", so you see whether the link is safe without leaving the page.
 
-Access your data for all websites - Reads the web address (URL) of the page you are visiting so Scam Guard can check whether it is a phishing or fake website, and show a full-screen warning before you enter your password. Detection runs locally; no data is sent anywhere.
+Access your data for all websites - Reads the web address (URL) of the page you are visiting so Scam Guard can check whether it is a phishing or fake website, and show a full-screen warning before you enter your password. On the page it also reads links, forms and password/card fields locally to warn you about suspicious behaviour. Detection runs inside the browser; no data is uploaded. The only remote download is the public list of reported scam domains, which you can disable.
 
 --------------------------------------------------------------------------
 7) Privacy Policy URL (mandatory)
@@ -90,5 +90,5 @@ assets/icons/icon128.png (Firefox 128x128 ya 256x256 leta hai)
 10) Note
 --------------------------------------------------------------------------
 Firefox upload free hai, review 1-2 din lagta hai.
-Zip: dist\scamguard-v1.0.1-firefox.zip
+Zip: dist\scamguard-v1.0.2-firefox.zip
 manifest.json me gecko.id pehle se set hai, is liye accepted ho jayega.

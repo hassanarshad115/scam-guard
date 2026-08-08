@@ -43,14 +43,28 @@ function ensureFeed() {
   return feedReady;
 }
 
+// Legitimate domains (brand sites and the roots of shared hosting platforms)
+// can never enter the live feed, even if a blacklist accidentally contains them.
+function filterFeedDomains(list) {
+  const out = [];
+  for (const item of list) {
+    const d = String(item || "").trim().toLowerCase();
+    if (!d) continue;
+    if (ScamGuardDetector.isProtectedDomain(d)) continue;
+    out.push(d);
+  }
+  return out;
+}
+
 function feedFromStored(stored) {
   try {
     if (stored.text) {
-      const list = stored.text.split("\n").filter(Boolean);
+      const list = filterFeedDomains(stored.text.split("\n"));
       return { generated: stored.generated || "", domains: new Set(list) };
     }
     if (Array.isArray(stored.domains)) {
-      return { generated: stored.generated || "", domains: new Set(stored.domains) };
+      const list = filterFeedDomains(stored.domains);
+      return { generated: stored.generated || "", domains: new Set(list) };
     }
   } catch (e) { /* ignore */ }
   return null;
@@ -70,15 +84,24 @@ async function refreshFeed(force) {
     if (!res.ok) return false;
     const json = await res.json();
     if (!json || !Array.isArray(json.domains) || json.domains.length === 0) return false;
-    feedCache = { generated: json.generated || "", domains: new Set(json.domains) };
+    const list = filterFeedDomains(json.domains);
+    if (list.length === 0) return false;
+    feedCache = { generated: json.generated || "", domains: new Set(list) };
     feedReady = Promise.resolve(feedCache);
     await storageArea.local.set({
-      feed: { ts: Date.now(), generated: json.generated || "", text: json.domains.join("\n") }
+      feed: { ts: Date.now(), generated: json.generated || "", text: list.join("\n") }
     });
     return true;
   } catch (e) {
     return false;
   }
+}
+
+// Only download the remote feed when the user has the live feed enabled.
+async function maybeRefreshFeed(force) {
+  const settings = await getSettings();
+  if (!settings.enableLiveFeed) return false;
+  return refreshFeed(force);
 }
 
 async function feedStatus() {
@@ -102,7 +125,9 @@ function feedLookup(rawUrl) {
   const parts = host.split(".");
   for (let i = 0; i < parts.length; i++) {
     const sub = parts.slice(i).join(".");
-    if (feedCache.domains.has(sub)) return sub;
+    if (!feedCache.domains.has(sub)) continue;
+    if (ScamGuardDetector.isProtectedDomain(sub)) continue;
+    return sub;
   }
   return null;
 }
@@ -261,7 +286,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       case "report:add": {
         const data = await storageArea.local.get({ reports: [] });
         const arr = data.reports || [];
-        arr.push({ url: String(message.url || ""), ts: Date.now() });
+        let host = "";
+        try { host = new URL(String(message.url || "")).hostname.toLowerCase(); } catch (e) { host = ""; }
+        if (!host) { sendResponse({ ok: false, count: arr.length }); break; }
+        arr.push({ url: host, ts: Date.now() });
         if (arr.length > 500) arr.splice(0, arr.length - 500);
         await storageArea.local.set({ reports: arr });
         sendResponse({ ok: true, count: arr.length });
@@ -275,6 +303,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         const next = Object.assign({}, s, message.value || {});
         await storageArea.local.set({ settings: next });
         cache.clear();
+        if (next.enableLiveFeed && !s.enableLiveFeed) refreshFeed(true);
         sendResponse(next);
         break;
       }
@@ -342,10 +371,10 @@ function attachEvent(api, name, fn) {
 // even after Chrome suspends and wakes the service worker.
 ensureFeed();
 
-attachEvent(chrome.runtime, "onInstalled", () => { refreshFeed(true); createMenu(); });
-attachEvent(chrome.runtime, "onStartup", () => { refreshFeed(true); });
+attachEvent(chrome.runtime, "onInstalled", () => { maybeRefreshFeed(true); createMenu(); });
+attachEvent(chrome.runtime, "onStartup", () => { maybeRefreshFeed(true); });
 attachEvent(chrome.alarms, "onAlarm", (alarm) => {
-  if (alarm && alarm.name === "feed-refresh") refreshFeed(true);
+  if (alarm && alarm.name === "feed-refresh") maybeRefreshFeed(true);
 });
 if (chrome.alarms && typeof chrome.alarms.create === "function") {
   try {
@@ -381,12 +410,12 @@ function notify(result) {
       ? host + " - this link is a known phishing/scam site. Do not enter any details."
       : level === "caution"
         ? host + " - this link looks suspicious."
-        : host + " - this link looks safe.";
+        : host + " - no known warning signs found.";
   try {
     chrome.notifications.create("sg-link-check", {
       type: "basic",
       iconUrl: "assets/icons/icon128.png",
-      title: level === "danger" ? "Scam Guard: DANGER" : level === "caution" ? "Scam Guard: Caution" : "Scam Guard: Safe",
+      title: level === "danger" ? "Scam Guard: DANGER" : level === "caution" ? "Scam Guard: Caution" : "Scam Guard: No known warning signs",
       message: message,
       priority: level === "danger" ? 2 : 0
     });

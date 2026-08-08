@@ -35,11 +35,11 @@ HOW IT PROTECTS YOU
 - Warns when a login page sends your password to another website
 - Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
 - Catches scam links hidden behind short links like bit.ly and adf.ly
-- Live scam list updated every day catches brand-new fakes
+- Live scam list updated twice a day catches brand-new fakes
 
 WHY PEOPLE LOVE IT
 - 100% free - no account, no subscription, no limits
-- 100% private - everything runs in your browser, nothing is uploaded
+- 100% private - no tracking, no uploads; the only download is a public list of reported scam domains (you can turn it off)
 - Easy English - simple warnings you understand in one second
 - Fast and lightweight - uses almost no memory
 - One click to block or trust any website

@@ -29,11 +29,11 @@ HOW IT PROTECTS YOU (phishing protection features)
 - Warns when a login page sends your password to another website
 - Warns about fake crypto wallets (MetaMask, Ledger, Binance and more)
 - Catches scam links hidden behind short links like bit.ly and adf.ly
-- Live scam list updated every day catches brand-new fakes
+- Live scam list updated regularly catches brand-new fakes
 
 WHY PEOPLE LOVE IT
 - 100% free - no account, no subscription, no limits
-- 100% private - everything runs in your browser, nothing is uploaded
+- 100% private - no tracking, no uploads; the only download is a public list of reported scam domains (you can turn it off)
 - Easy English - simple warnings you understand in one second
 - Fast and lightweight - uses almost no memory
 - One click to block or trust any website
@@ -48,7 +48,7 @@ Is Scam Guard really free?
 Yes. Scam Guard is 100% free with every feature included. There is no premium version, no trial, no account and no subscription.
 
 Is Scam Guard safe to use?
-Yes. Scam Guard never collects or uploads your data. All detection runs inside your browser. The only download is a daily public list of scam domains - nothing personal is ever sent.
+Yes. Scam Guard never collects or uploads your data. Detection runs inside your browser and reads page links, forms and input fields locally. The only download is a public list of reported scam domains - nothing personal is ever sent, and you can turn the download off in settings.
 
 Does Scam Guard sell my data?
 No. There is no analytics, no trackers, no ad network and no data broker anywhere in the extension.
@@ -102,15 +102,15 @@ before you type your password", "One-click block or trust".)
 --------------------------------------------------------------------------
 storage - Saves your settings, sensitivity level and your blocked/trusted site lists. Everything is stored only in your own browser; nothing is uploaded.
 
-tabs - Reads the web address (URL) of the current tab only, so Scam Guard can check whether the site you are visiting is a phishing or fake website. It never reads page content, passwords or personal data.
+tabs - Reads the web address (URL) of the current tab only, so Scam Guard can check whether the site you are visiting is a phishing or fake website. It never reads passwords or personal data.
 
-alarms - Schedules the once-a-day download of the public phishing domain list so it stays up to date.
+alarms - Schedules the twice-a-day download of the public phishing domain list so it stays up to date.
 
 contextMenus - Adds the "Check this link with Scam Guard" item when you right-click a link, so you can verify a URL before opening it.
 
 notifications - Shows a one-time result notification after you use "Check this link", so you see whether the link is safe without leaving the page.
 
-Read and change all websites' data (<all_urls>) - Lets the extension check the URL of every website you open so it can show a full-screen warning BEFORE you enter your password on a fake site. All detection runs locally inside the browser; no data is sent to any server.
+Read and change all websites' data (<all_urls>) - Lets the extension check the URL of every website you open so it can show a full-screen warning BEFORE you enter your password on a fake site. On the page it also reads links, forms and password/card fields locally to warn you about suspicious behaviour. All detection runs inside the browser; no data is uploaded. The only remote download is the public list of reported scam domains, which you can disable.
 
 --------------------------------------------------------------------------
 10) PRIVACY PRACTICES
@@ -135,5 +135,5 @@ Chrome Web Store ranking 4 cheezon par chalti hai:
 3. Ratings & reviews - 4-5 star reviews matlab top par aa jayega
 4. Google par top ke liye: listing ka link share karo, aur ek chhota SEO landing page banao (example.com/scam-guard) jo listing par link kare - Google us page ko bhi rank karega.
 
-Zip: dist\scamguard-v1.0.1-chrome.zip (node tools/build.mjs se banata hai)
+Zip: dist\scamguard-v1.0.2-chrome.zip (node tools/build.mjs se banata hai)
 Chrome pehli dafa review karta hai, 2-5 din lag sakte hain. $5 developer fee pehle pay karni hoti hai.

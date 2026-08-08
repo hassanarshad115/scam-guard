@@ -12,7 +12,7 @@ Aap VS Code me change karo -> commit -> tag push (v1.1.0)
         |
         v
 GitHub Actions khud:
-  1. Tests chalata hai (22 test cases)
+  1. Tests chalata hai (source + minified build dono)
   2. Build + zip banata hai (version-dynamic)
   3. Chrome, Firefox, Edge par upload + publish karta hai
         |

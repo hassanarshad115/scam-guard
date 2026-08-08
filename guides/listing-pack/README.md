@@ -34,7 +34,7 @@ Pichhe decide ho chuka hai ke ek Gmail hi sab accounts ke liye - wo yahan use ka
 
 ## Pre-publish checklist
 
-- [ ] `node tools/build.mjs` chala kar naye zips bana lein (`dist\scamguard-v1.0.1-chrome.zip`, `dist\scamguard-v1.0.1-edge.zip`, `dist\scamguard-v1.0.1-firefox.zip`)
+- [ ] `node tools/build.mjs` chala kar naye zips bana lein (`dist\scamguard-v1.0.2-chrome.zip`, `dist\scamguard-v1.0.2-edge.zip`, `dist\scamguard-v1.0.2-firefox.zip`)
 - [ ] `node tools/build.mjs` se 83/83 tests pass hoon (47 detector + 36 service-worker)
 - [ ] Icons `assets\icons\` me maujood (16/32/48/128)
 - [ ] Screenshots (3) `assets\store\` me maujood

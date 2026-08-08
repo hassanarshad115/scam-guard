@@ -3,9 +3,11 @@
 A **free, private, cross-browser browser extension** that warns you before you
 enter passwords or payment details on fake / phishing websites.
 
-- **100% client-side** - no server, no tracking, no data ever leaves your browser
+- **Private by design** - no account, no tracking, no data uploaded. Detection
+  runs inside your browser; only a public list of reported scam domains is
+  downloaded automatically (can be turned off in settings)
 - **Cross-browser** - one codebase runs on Chrome, Edge, Firefox, Opera and Brave
-- **Fast** - lightweight heuristic engine, in-memory caching, zero network calls
+- **Fast** - lightweight heuristic engine, in-memory caching, cached live feed
 - **Easy to use** - one-click block / trust, sensitivity levels, backup & restore
 
 ---
@@ -14,11 +16,26 @@ enter passwords or payment details on fake / phishing websites.
 
 - Detects lookalike brands (`paypal-secure-login.xyz`), typo domains (`paypa1.com`),
   leet-speak (`g00gle.com`), homograph / punycode domains and suspicious TLDs.
-- Catches classic tricks: `@` in the URL, IP-address hosts, keyword-stuffed domains.
+- Catches classic tricks: `@`-in-URL attacks, IP-address hosts, keyword-stuffed domains.
+- Official brand domains map: only real brand sites (e.g. `paypal.com`,
+  `amazon.co.uk`, `login.microsoftonline.com`) are ever treated as safe - so
+  `paypal.evil.com`, `paypal.com.evil.com` and `paypal.ai` are flagged as fakes.
 - Full-screen warning overlay before you can type anything.
 - Popup with a clear safe / caution / danger status and reasons.
 - Options page: toggles, sensitivity, blocked list, trusted list, export/import.
-- Never flags real brand domains (`paypal.com`, `amazon.co.uk`, ...).
+- Never flags real brand domains (exact hostname/suffix validation only).
+
+## How detection works (what the extension reads)
+
+- **Live phishing feed** - Scam Guard downloads a public domain-only blacklist
+  (CERT.PL) roughly twice a day and matches the *hostname* of the page you are
+  on against it. Only the domain list is downloaded - no URL, no browsing data
+  and no personal information is ever sent. Legitimate domains (brand sites and
+  the roots of shared hosting platforms) are filtered out and can never enter
+  the feed.
+- **Local inspection** - on the page itself the extension reads links, forms and
+  input fields (password/card fields) to warn you about suspicious behaviour.
+  All of this happens locally inside the browser.
 
 ---
 
@@ -39,7 +56,7 @@ ExtenstionsProject/
 |   `-- options/               # settings / blocklist manager
 |-- tools/
 |   |-- generate-assets.ps1    # regenerates icons + store art
-|   |-- test-detector.mjs      # detector self-test (22 test cases)
+|   |-- test-detector.mjs      # detector self-test (59 regression cases)
 |   `-- build.mjs              # production build: test -> copy -> minify -> zip
 |-- guides/                    # step-by-step store upload guides
 `-- build.bat                  # double-click to build (Windows)
@@ -74,11 +91,12 @@ Run:
 node tools/build.mjs
 ```
 
-This runs the tests, copies the extension into `dist/`, minifies the code and
-creates the store upload zips:
-- `dist/scamguard-v1.0.1-chrome.zip`
-- `dist/scamguard-v1.0.1-edge.zip`
-- `dist/scamguard-v1.0.1-firefox.zip`
+This runs the tests (against the source AND the minified build), copies the
+extension into `dist/`, minifies the code and creates the store upload zips:
+- `dist/scamguard-v1.0.2-chrome.zip`
+- `dist/scamguard-v1.0.2-edge.zip`
+- `dist/scamguard-v1.0.2-firefox.zip`
+- `dist/scamguard-v1.0.2-opera.zip`
 
 ---
 
@@ -95,9 +113,12 @@ creates the store upload zips:
 
 ## Privacy
 
-Scam Guard sends **nothing** anywhere. Detection runs entirely inside the
-browser. Blocked / trusted lists are stored only in the browser's own storage
-and can be exported/imported by the user.
+Scam Guard uploads **nothing** about you. Detection runs inside the browser and
+reads page links, forms and input fields locally. The only network connection is
+downloading a public, domain-only list of reported scam domains (CERT.PL) a
+couple of times a day - you can turn this off in settings at any time. Blocked /
+trusted lists are stored only in the browser's own storage and can be
+exported/imported by the user. See `guides/listing-pack/privacy-policy.md`.
 
 ## License
 

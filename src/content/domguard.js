@@ -79,10 +79,12 @@
   }, true);
 
   // ---- automatic verdict toast (shows once per page load) ----
+  // Only shown for danger/caution - a "safe" toast on every page would be
+  // noise, so it is disabled by default.
   function showToast(result) {
     if (!result || typeof result !== "object") return;
     const verdict = result.verdict;
-    if (verdict !== "safe" && verdict !== "caution" && verdict !== "danger") return;
+    if (verdict !== "caution" && verdict !== "danger") return;
 
     const old = document.getElementById("sg-verdict-toast");
     if (old && old.parentNode) old.parentNode.removeChild(old);
@@ -91,9 +93,7 @@
     const caution = verdict === "caution";
     const headText = danger
       ? "\u26D4 DANGER: this may be a fake website!"
-      : caution
-        ? "\u26A0\uFE0F Caution: this site looks suspicious"
-        : "\u2705 Safe: this website looks fine";
+      : "\u26A0\uFE0F Caution: this site looks suspicious";
 
     const el = document.createElement("div");
     el.id = "sg-verdict-toast";
@@ -108,14 +108,12 @@
     head.textContent = headText;
     body.appendChild(head);
 
-    if (danger || caution) {
-      const reason = (result.reasons && result.reasons[0]) || "";
-      if (reason) {
-        const detail = document.createElement("span");
-        detail.className = "sg-toast-detail";
-        detail.textContent = reason;
-        body.appendChild(detail);
-      }
+    const reason = (result.reasons && result.reasons[0]) || "";
+    if (reason) {
+      const detail = document.createElement("span");
+      detail.className = "sg-toast-detail";
+      detail.textContent = reason;
+      body.appendChild(detail);
     }
 
     const closeBtn = document.createElement("button");

@@ -18,13 +18,13 @@ function dirname() {
 }
 
 // ---------- Step 1: run tests ----------
-console.log("[1/4] Running detector tests...");
+console.log("[1/5] Running detector tests...");
 const test = spawnSync(process.execPath, [join(root, "tools", "test-detector.mjs")], { stdio: "inherit" });
 if (test.status !== 0) {
   console.error("Tests failed. Build aborted.");
   process.exit(1);
 }
-console.log("[1/4] Running service-worker tests...");
+console.log("[1/5] Running service-worker tests...");
 const testSw = spawnSync(process.execPath, [join(root, "tools", "test-service-worker.mjs")], { stdio: "inherit" });
 if (testSw.status !== 0) {
   console.error("Service-worker tests failed. Build aborted.");
@@ -32,7 +32,7 @@ if (testSw.status !== 0) {
 }
 
 // ---------- Step 2: copy ----------
-console.log("[2/4] Copying extension into dist/ ...");
+console.log("[2/5] Copying extension into dist/ ...");
 rmSync(distDir, { recursive: true, force: true });
 mkdirSync(distDir, { recursive: true });
 
@@ -41,7 +41,7 @@ for (const item of ["manifest.json", "_locales", "assets", "src"]) {
 }
 
 // ---------- Step 3: minify ----------
-console.log("[3/4] Minifying files...");
+console.log("[3/5] Minifying files...");
 const files = walk(distDir, []).filter(f =>
   f.endsWith(".js") || f.endsWith(".css") || f.endsWith(".html")
 );
@@ -53,8 +53,21 @@ for (const file of files) {
 }
 console.log("   Minified " + minified + " of " + files.length + " files.");
 
-// ---------- Step 4: zip ----------
-console.log("[4/4] Creating store upload zips...");
+// ---------- Step 4: re-run all tests against the minified dist build ----------
+console.log("[4/5] Re-running tests against the minified dist build...");
+const testDist = spawnSync(process.execPath, [join(root, "tools", "test-detector.mjs"), distDir], { stdio: "inherit" });
+if (testDist.status !== 0) {
+  console.error("Dist detector tests failed. Build aborted.");
+  process.exit(1);
+}
+const testDistSw = spawnSync(process.execPath, [join(root, "tools", "test-service-worker.mjs"), distDir], { stdio: "inherit" });
+if (testDistSw.status !== 0) {
+  console.error("Dist service-worker tests failed. Build aborted.");
+  process.exit(1);
+}
+
+// ---------- Step 5: zip ----------
+console.log("[5/5] Creating store upload zips...");
 const manifest = JSON.parse(readFileSync(join(root, "manifest.json"), "utf8"));
 const version = manifest.version;
 

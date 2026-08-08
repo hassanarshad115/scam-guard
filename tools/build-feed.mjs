@@ -1,11 +1,16 @@
 // Scam Guard - live phishing feed builder
-// Pulls free public phishing/abuse lists, normalizes them to hostnames,
-// and writes feed/feed.json (served to the extension via jsDelivr).
+// Pulls the public CERT.PL phishing domain list, normalizes it to hostnames,
+// filters out protected legitimate domains, and writes feed/feed.json
+// (served to the extension via jsDelivr).
 //
-// Sources (all public, no API key):
-//   OpenPhish  https://openphish.com/feed.txt
-//   URLhaus    https://urlhaus.abuse.ch/downloads/text_recent/
+// Source (public, no API key):
 //   cert.pl    https://hole.cert.pl/domains/domains.txt
+//
+// Notes:
+//   - OpenPhish and URLhaus are NOT used. OpenPhish's feed is a URL feed that
+//     cannot be redistributed, and URL-based feeds must never be converted into
+//     whole-domain blocks. cert.pl is a DOMAIN feed, so whole-domain blocking
+//     is the correct and intended match.
 //
 // Run: node tools/build-feed.mjs
 // Output: feed/feed.json  { generated, count, domains: [] }
@@ -16,11 +21,16 @@ import { dirname, join } from "path";
 
 const root = dirname(fileURLToPath(import.meta.url));
 const MAX_DOMAINS = 250000;   // safety guard only - the full public lists are kept
-const FETCH_TIMEOUT_MS = 10000;
+const FETCH_TIMEOUT_MS = 15000;
+
+// Reuse the detector's protected-domain rules so the build and the runtime
+// always agree on which legitimate domains can never be blocked.
+const detectorCode = readFileSync(join(root, "..", "src", "detector", "detector.js"), "utf8");
+const sandbox = {};
+const Detector = new Function("self", detectorCode + "\nreturn self.ScamGuardDetector;")(sandbox);
+const isProtected = Detector.isProtectedDomain;
 
 const SOURCES = [
-  { name: "OpenPhish", url: "https://openphish.com/feed.txt", mode: "urls" },
-  { name: "URLhaus", url: "https://urlhaus.abuse.ch/downloads/text_recent/", mode: "urls" },
   { name: "cert.pl", url: "https://hole.cert.pl/domains/domains.txt", mode: "domains" }
 ];
 
@@ -70,7 +80,9 @@ for (const source of SOURCES) {
   for (const line of lines) {
     seen++;
     const host = hostFrom(line, source.mode);
-    if (host) counts.set(host, (counts.get(host) || 0) + 1);
+    if (!host) continue;
+    if (isProtected(host)) continue;
+    counts.set(host, (counts.get(host) || 0) + 1);
   }
   console.log("OK   " + source.name + " (" + lines.length + " lines)");
 }

@@ -5,7 +5,7 @@
 
   const ICONS = { safe: "\u2705", caution: "\u26A0\uFE0F", danger: "\u274C", loading: "\u231B" };
   const TEXTS = {
-    safe: "This site looks safe.",
+    safe: "No known warning signs found.",
     caution: "Caution: this site looks suspicious.",
     danger: "DANGER: this may be a fake website!",
     loading: "Checking this site..."

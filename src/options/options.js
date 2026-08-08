@@ -48,7 +48,8 @@
     const settings = await send("settings:get");
     if (settings) {
       heuristicsEl.checked = settings.enableHeuristics !== false;
-      overlayEl.checked = settings.enableWarningOverlay !== false;
+      const overlayMode = settings.warningMode || (settings.enableWarningOverlay === false ? "off" : "full");
+      overlayEl.checked = overlayMode !== "off";
       cautionEl.checked = settings.showCaution === true;
       livefeedEl.checked = settings.enableLiveFeed !== false;
       toastsEl.checked = settings.enableToasts !== false;
@@ -73,7 +74,9 @@
   });
 
   overlayEl.addEventListener("change", () => {
-    send("settings:set", { enableWarningOverlay: overlayEl.checked });
+    // warningMode drives the full-screen overlay in the content script, so the
+    // toggle must update it (enableWarningOverlay alone was being ignored).
+    send("settings:set", { warningMode: overlayEl.checked ? "full" : "off" });
   });
 
   cautionEl.addEventListener("change", () => {
@@ -126,7 +129,7 @@
     if (!blocklist) return;
     const payload = {
       app: "ScamGuard",
-      version: "1.0.1",
+      version: "1.0.2",
       exported: new Date().toISOString(),
       settings: settings || {},
       blocklist: blocklist

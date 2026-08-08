@@ -1,13 +1,16 @@
 // Scam Guard - detector self-test
-// Run: node tools/test-detector.mjs
+// Run: node tools/test-detector.mjs [projectRoot]
+// With an optional project root, tests run against a built/minified copy
+// (used by build.mjs to verify the final store builds).
 // Verifies the engine catches fakes but does NOT flag real sites.
 
 import { readFileSync } from "fs";
 import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { dirname, join, resolve } from "path";
 
-const root = dirname(fileURLToPath(import.meta.url));
-const code = readFileSync(join(root, "..", "src", "detector", "detector.js"), "utf8");
+const here = dirname(fileURLToPath(import.meta.url));
+const projectRoot = process.argv[2] ? resolve(process.argv[2]) : join(here, "..");
+const code = readFileSync(join(projectRoot, "src", "detector", "detector.js"), "utf8");
 const sandbox = {};
 const fn = new Function("self", code + "\nreturn self.ScamGuardDetector;");
 const Detector = fn(sandbox);
@@ -15,20 +18,38 @@ const Detector = fn(sandbox);
 const cases = [
   // [url, expectedVerdict, label]
   ["https://paypal.com/", "safe", "Real PayPal"],
+  ["https://www.paypal.com/", "safe", "Real PayPal www"],
+  ["https://paypal.co.uk/", "safe", "Real PayPal UK"],
   ["https://www.amazon.co.uk/gp/", "safe", "Real Amazon UK"],
+  ["https://amazon.in/", "safe", "Real Amazon India"],
   ["https://google.com/search?q=x", "safe", "Real Google"],
+  ["https://google.co.in/", "safe", "Real Google India"],
   ["https://github.com/login", "safe", "Real GitHub login"],
   ["https://example.com/", "safe", "Normal site"],
   ["https://en.wikipedia.org/wiki/Phishing", "safe", "Wikipedia"],
+  ["https://en.wikipedia.org/wiki/PayPal", "safe", "Wikipedia article mentions PayPal"],
   ["https://bankofamerica.com/", "safe", "BofA real"],
   ["https://bankofamerica.com.online/", "danger", "BofA fake (.com.online trick)"],
   ["https://mail.google.com/mail/", "safe", "Real Gmail"],
+  ["https://login.microsoftonline.com/", "safe", "Real Microsoft auth domain"],
+  ["https://my.dropbox.com/", "safe", "Real Dropbox subdomain"],
+  ["https://amazonaws.com/", "safe", "AWS root domain"],
+
+  // P0#6 false negatives - these must NOT be safe
+  ["https://paypal.evil.com/", "danger", "brand on wrong registrable domain"],
+  ["https://paypal.com.evil.com/", "danger", "paypal.com embedded in evil domain"],
+  ["https://paypal.ai/", "danger", "brand on .ai not owned by the brand"],
+
+  // P0#7 false positives - these must stay safe
+  ["https://example.com/signin?email=user@example.com", "safe", "email address in query string"],
+
+  // P0#8 at-sign trick still caught (real userinfo in authority)
+  ["https://paypal.com@evil-site.xyz/", "danger", "at-sign trick"],
 
   ["https://paypal-secure-login.xyz/", "danger", "PayPal lookalike .xyz"],
   ["https://paypal.com.xyz/", "danger", "PayPal TLD swapped"],
   ["https://g00gle-verify.top/login", "danger", "Google typo + verify"],
   ["https://accounts-google.com.security-check.club/", "danger", "Embedded google fake"],
-  ["https://paypal.com@evil-site.xyz/", "danger", "at-sign trick"],
   ["https://192.168.1.1/verify.php", "caution", "private IP + verify"],
   ["https://www.paypa1-secure.net/", "danger", "paypal typo"],
   ["https://paypa1.com/", "danger", "leetspeak paypal domain"],

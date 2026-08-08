@@ -15,7 +15,7 @@ kar sakte hain.
 
 ## Extension publish
 
-1. Build karein: `node tools/build.mjs` -> `dist\scamguard-v1.0.1-chrome.zip`.
+1. Build karein: `node tools/build.mjs` -> `dist\scamguard-v1.0.2-chrome.zip`.
 2. Dashboard me **"New item"** -> zip upload karein.
 3. Tabs fill karein:
    - **Store listing** - name, description, screenshots (text `seo-listing-guide.md` me)

@@ -1,16 +1,19 @@
 // Scam Guard - service worker integration self-test
-// Run: node tools/test-service-worker.mjs
+// Run: node tools/test-service-worker.mjs [projectRoot]
+// With an optional project root, tests run against a built/minified copy
+// (used by build.mjs to verify the final store builds).
 // Loads the real detector + service worker with a mocked chrome API
-// and verifies analyze / blocklist / settings / stats / cache behavior.
+// and verifies analyze / blocklist / settings / stats / cache / feed behavior.
 
 import { readFileSync } from "fs";
 import { createContext, runInContext } from "node:vm";
 import { fileURLToPath } from "node:url";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 
-const root = dirname(fileURLToPath(import.meta.url));
+const here = dirname(fileURLToPath(import.meta.url));
+const projectRoot = process.argv[2] ? resolve(process.argv[2]) : join(here, "..");
 
-const detectorCode = readFileSync(join(root, "..", "src", "detector", "detector.js"), "utf8");
+const detectorCode = readFileSync(join(projectRoot, "src", "detector", "detector.js"), "utf8");
 const sandbox = {};
 const Detector = new Function("self", detectorCode + "\nreturn self.ScamGuardDetector;")(sandbox);
 
@@ -60,7 +63,8 @@ const chrome = {
   }
 };
 
-const workerCode = readFileSync(join(root, "..", "src", "background", "service-worker.js"), "utf8");
+const workerCode = readFileSync(join(projectRoot, "src", "background", "service-worker.js"), "utf8");
+let fetchCalls = 0;
 const ctx = {
   chrome, console, URL, importScripts: () => {}, ScamGuardDetector: Detector,
   fetch: async () => { throw new Error("fetch not stubbed"); }
@@ -155,16 +159,31 @@ const bad = await send({ type: "nonsense", value: 1 });
 check("unknown message -> error", bad && bad.error === "unknown message type", bad);
 
 // --- live phishing feed ---
-const feedDomains = ["evil-feed.xyz", "steal-login.site"];
-ctx.fetch = async () => ({
-  ok: true,
-  json: async () => ({ generated: "2026-08-07T00:00:00Z", domains: feedDomains })
-});
+const feedDomains = ["evil-feed.xyz", "steal-login.site", "github.com", "dropbox.com", "evil.github.io"];
+ctx.fetch = async () => {
+  fetchCalls++;
+  return {
+    ok: true,
+    json: async () => ({ generated: "2026-08-07T00:00:00Z", domains: feedDomains })
+  };
+};
+
+// P0#9: when the live feed is disabled, the remote list must NOT be downloaded.
+fetchCalls = 0;
+await send({ type: "settings:set", value: { enableLiveFeed: false } });
 if (startupHandler) await startupHandler();
 await new Promise(r => setTimeout(r, 10));
+check("feed disabled -> no network fetch", fetchCalls === 0, { fetchCalls });
+await send({ type: "settings:set", value: { enableLiveFeed: true } });
+
+// P0#9 continued: re-enabling the feed triggers a refresh.
+fetchCalls = 0;
+if (startupHandler) await startupHandler();
+await new Promise(r => setTimeout(r, 10));
+check("feed re-enabled -> network fetch happens", fetchCalls > 0, { fetchCalls });
 
 const f1 = await send({ type: "feed:status" });
-check("feed loaded 2 domains", f1.count === 2, f1);
+check("feed loaded, protected domains filtered out (5 raw -> 3 kept)", f1.count === 3, f1);
 
 const rF1 = await analyze("https://evil-feed.xyz/login");
 check("feed domain -> danger", rF1.verdict === "danger", rF1);
@@ -175,6 +194,14 @@ check("feed parent-domain match -> danger", rF2.verdict === "danger", rF2);
 
 const rF3 = await analyze("https://legit.example.com/");
 check("non-feed domain stays safe", rF3.verdict === "safe", rF3);
+
+// P0#4: protected legitimate domains can never be blocked by the feed.
+const rG1 = await analyze("https://github.com/");
+check("github.com never blocked by feed", rG1.verdict === "safe", rG1);
+const rG2 = await analyze("https://dropbox.com/");
+check("dropbox.com never blocked by feed", rG2.verdict === "safe", rG2);
+const rG3 = await analyze("https://evil.github.io/");
+check("evil.github.io blocked by feed", rG3.verdict === "danger", rG3);
 
 await send({ type: "blocklist:addAllowed", value: "evil-feed.xyz" });
 const rF4 = await analyze("https://evil-feed.xyz/");
@@ -189,11 +216,15 @@ await send({ type: "settings:set", value: { enableLiveFeed: true } });
 const rF6 = await analyze("https://steal-login.site/");
 check("feed re-enabled -> danger", rF6.verdict === "danger", rF6);
 
-// --- local reports ---
-const rep1 = await send({ type: "report:add", url: "https://steal-login.site/" });
+// --- local reports (P0#13: hostname only, never the full URL) ---
+const rep1 = await send({ type: "report:add", url: "https://steal-login.site/login" });
 check("report stored", rep1 && rep1.ok && rep1.count === 1, rep1);
 const rep2 = await send({ type: "report:add", url: "https://steal-login.site/x" });
 check("second report stored", rep2 && rep2.ok && rep2.count === 2, rep2);
+await send({ type: "report:add", url: "https://sub.evil-feed.xyz/deep/path?q=1&r=2" });
+const reports = store.reports || [];
+const last = reports[reports.length - 1];
+check("report stores hostname only, not full URL", last && last.url === "sub.evil-feed.xyz", last);
 
 // --- toolbar badge ---
 function lastBadge(kind) {
