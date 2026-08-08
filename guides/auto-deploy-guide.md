@@ -157,6 +157,7 @@ git push origin main --tags        # YE HAI TRIGGER
 
 | File | Kaam |
 |---|---|
-| `.github/workflows/publish.yml` | Auto-publish pipeline (tag trigger) |
-| `tools/release.mjs` | Version bump + tests + build + git instructions |
+| `.github/workflows/publish.yml` | Auto-publish pipeline (tag trigger, needs BPP_KEYS secret) |
+| `tools/upload.mjs` | Local store upload (Edge API + Firefox AMO API, no GitHub needed) |
+| `tools/release.mjs` | Version bump + tests + build + upload/git instructions |
 | `tools/build.mjs` | Build (ab version manifest se leta hai) |

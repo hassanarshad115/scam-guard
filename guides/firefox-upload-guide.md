@@ -27,5 +27,23 @@ Firefox par publish karna **bilkul free** hai - koi fee nahi, koi card nahi.
 - Naya build bana kar Developer Hub me **"New version"** -> zip upload -> submit.
 - Firefox updates bina kisi fee ke hamesha free hain.
 
+## Updates via API (optional, faster)
+
+1. **API keys** banao: addons.mozilla.org -> **Manage My Submissions** ->
+   **Manage API keys** -> "Create new credentials".
+   - **jwtIssuer (API key)** + **jwtSecret (API secret)** copy karo.
+   - Secret sirf ek dafa dikhaya jata hai - safe jagah save karo.
+2. `secrets/store-credentials.json` ke `firefox` section me `jwtIssuer` +
+   `jwtSecret` bharo (`addonId` pehle se hai: `scamguard@hassanarshad115`).
+3. Upload:
+   ```
+   node tools/upload.mjs firefox
+   ```
+   Submit karna ho to:
+   ```
+   node tools/upload.mjs firefox --publish
+   ```
+4. Status yahan check karo: `https://addons.mozilla.org/developers/addons/scamguard@hassanarshad115/versions/`
+
 > Note: `manifest.json` me pehle se `browser_specific_settings.gecko.id` hai, is liye
 > Firefox bina issue accept kar lega.

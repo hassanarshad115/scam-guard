@@ -32,3 +32,27 @@ description chahiye hota hai - wo form me hi mil jata hai.
 ## Updates
 
 **"Create new submission"** -> naya zip upload -> submit. Free.
+
+## Updates via API (optional, faster)
+
+Product ID aur API key chahiye:
+
+1. **Product ID** (addonId): Partner Center -> **Microsoft Edge** -> extension
+   open karo -> **Product ID** copy karo (Address bar me `microsoftedge/` aur
+   `/packages` ke beech wala GUID).
+2. **Client ID + API key**: Partner Center me API key management se bane the
+   (API key 72 din valid hoti hai). Is project me `secrets/store-credentials.json`
+   ke `edge` section me `clientId` + `apiKey` pehle se hain.
+3. `secrets/store-credentials.json` me `addonId` bharo.
+4. Upload (draft):
+   ```
+   node tools/upload.mjs edge
+   ```
+5. Jab draft ready ho aur certification ke liye submit karna ho:
+   ```
+   node tools/upload.mjs edge --publish
+   ```
+
+> **Zaroori:** Agar koi purani submission abhi **in review** hai to publish fail
+> hoga (`InProgressSubmission`). Pehle v1.0.1 ke publish hone ka wait karo,
+> phir 1.0.2 submit karo - warna review reset/supersede ho sakta hai.
